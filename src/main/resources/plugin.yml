@@ -1,5 +1,0 @@
-name: progress-pulse-plugin
-author: "H3nriqueL1ma"
-version: 'alpha-v0.0.0'
-main: com.github.h3nriquel1ma.progresspulse.ProgressPulse
-api-version: '1.18'
