@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ProgressPulsePlugin extends JavaPlugin {
 
+    // Utilizado para registrar ouvintes de eventos.
     @Override
     public void onEnable() {
 
