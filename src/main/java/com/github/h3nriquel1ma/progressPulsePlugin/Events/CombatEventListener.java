@@ -27,8 +27,6 @@ public class CombatEventListener implements Listener {
             UUID playerId = damager.getUniqueId();
 
             playerScoreManager.incrementCombatPoints(playerId);
-
-            damager.sendMessage(Component.text("Score atual: " + playerScoreManager.getPlayerCombatPoints(playerId)));
         }
     }
 }
