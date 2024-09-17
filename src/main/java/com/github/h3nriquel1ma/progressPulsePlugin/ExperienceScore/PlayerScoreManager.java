@@ -37,4 +37,40 @@ public class PlayerScoreManager {
 
         return 0;
     }
+
+    public void incrementMiningPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            player.incrementMiningPoints();
+        }
+    }
+
+    public Integer getPlayerMiningPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            return player.getMiningPoints();
+        }
+
+        return 0;
+    }
+
+    public void incrementConstrnPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            player.incrementConstrnPoints();
+        }
+    }
+
+    public Integer getPlayerConstrnPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            return player.getConstrnPoints();
+        }
+
+        return 0;
+    }
 }

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.*;
 
+// Sistema de Scoreboard do jogador (parte visual).
 public class ExperienceScoreBoard {
     private final PlayerScoreManager playerScoreManager;
     private final Plugin plugin;
@@ -23,7 +24,7 @@ public class ExperienceScoreBoard {
         Objective objective = scoreboard.getObjective("playerExperience");
 
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("playerExperience", "dummy", Component.text("Stats (" + player.getName() + ")"));
+            objective = scoreboard.registerNewObjective("playerExperience", "dummy", Component.text(ChatColor.RED + "Stats (" + player.getName() + ")"));
 
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
@@ -33,8 +34,14 @@ public class ExperienceScoreBoard {
         Objective finalObjective = objective;
 
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            Score score = finalObjective.getScore(ChatColor.RED + "Combat: ");
-            score.setScore(playerScoreManager.getPlayerCombatPoints(player.getUniqueId()));
+            Score combatScore = finalObjective.getScore(ChatColor.BLUE + "Combat: ");
+            combatScore.setScore(playerScoreManager.getPlayerCombatPoints(player.getUniqueId()));
+
+            Score miningScore = finalObjective.getScore(ChatColor.BLUE + "Mining: ");
+            miningScore.setScore(playerScoreManager.getPlayerMiningPoints(player.getUniqueId()));
+
+            Score constrnScore = finalObjective.getScore(ChatColor.BLUE + "Construction: ");
+            constrnScore.setScore(playerScoreManager.getPlayerConstrnPoints(player.getUniqueId()));
 
             player.setScoreboard(scoreboard);
         }, 0L, 20L);
