@@ -24,7 +24,7 @@ public class ExperienceScoreBoard {
         Objective objective = scoreboard.getObjective("playerExperience");
 
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("playerExperience", "dummy", Component.text(ChatColor.RED + "Stats (" + player.getName() + ")"));
+            objective = scoreboard.registerNewObjective("playerExperience", "dummy", Component.text(ChatColor.GOLD + "Stats (" + player.getName() + ")"));
 
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
@@ -34,14 +34,22 @@ public class ExperienceScoreBoard {
         Objective finalObjective = objective;
 
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            Score combatScore = finalObjective.getScore(ChatColor.BLUE + "Combat: ");
+
+
+            Score lineTop = finalObjective.getScore("§l§m----------------");
+            lineTop.setScore(0);
+
+            Score combatScore = finalObjective.getScore(ChatColor.DARK_GRAY + "Combat: ");
             combatScore.setScore(playerScoreManager.getPlayerCombatPoints(player.getUniqueId()));
 
-            Score miningScore = finalObjective.getScore(ChatColor.BLUE + "Mining: ");
+            Score miningScore = finalObjective.getScore(ChatColor.DARK_GRAY + "Mining: ");
             miningScore.setScore(playerScoreManager.getPlayerMiningPoints(player.getUniqueId()));
 
-            Score constrnScore = finalObjective.getScore(ChatColor.BLUE + "Construction: ");
+            Score constrnScore = finalObjective.getScore(ChatColor.DARK_GRAY + "Construction: ");
             constrnScore.setScore(playerScoreManager.getPlayerConstrnPoints(player.getUniqueId()));
+
+            Score resourceScore = finalObjective.getScore(ChatColor.DARK_GRAY + "Res. Collection: ");
+            resourceScore.setScore(playerScoreManager.getPlayerResourcePoints(player.getUniqueId()));
 
             player.setScoreboard(scoreboard);
         }, 0L, 20L);

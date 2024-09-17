@@ -27,7 +27,6 @@ public class PlayerScoreManager {
             player.incrementCombatPoints();
         }
     }
-
     public Integer getPlayerCombatPoints(UUID playerId) {
         if (isPlayerIdExisting(playerId)) {
             PlayerData player = playersData.get(playerId);
@@ -45,7 +44,6 @@ public class PlayerScoreManager {
             player.incrementMiningPoints();
         }
     }
-
     public Integer getPlayerMiningPoints(UUID playerId) {
         if (isPlayerIdExisting(playerId)) {
             PlayerData player = playersData.get(playerId);
@@ -63,12 +61,28 @@ public class PlayerScoreManager {
             player.incrementConstrnPoints();
         }
     }
-
     public Integer getPlayerConstrnPoints(UUID playerId) {
         if (isPlayerIdExisting(playerId)) {
             PlayerData player = playersData.get(playerId);
 
             return player.getConstrnPoints();
+        }
+
+        return 0;
+    }
+
+    public void incrementResourcePoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            player.incrementResCollPoints();
+        }
+    }
+    public Integer getPlayerResourcePoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            return player.getResCollPoints();
         }
 
         return 0;
