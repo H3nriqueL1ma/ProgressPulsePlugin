@@ -2,6 +2,7 @@ package com.github.h3nriquel1ma.progressPulsePlugin.Events;
 
 import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.PlayerScoreManager;
 import net.kyori.adventure.text.Component;
+import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,8 @@ public class CombatEventListener implements Listener {
             UUID playerId = damager.getUniqueId();
 
             playerScoreManager.incrementCombatPoints(playerId);
+
+            damager.sendActionBar(Component.text("Teste"));
         }
     }
 }

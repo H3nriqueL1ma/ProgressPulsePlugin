@@ -1,6 +1,5 @@
 package com.github.h3nriquel1ma.progressPulsePlugin.Events;
 
-import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.ExperienceScoreBoard;
 import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.PlayerScoreManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,11 +11,9 @@ import java.util.UUID;
 public class JoinEventListener implements Listener {
 
     private final PlayerScoreManager playerScoreManager;
-    private final ExperienceScoreBoard experienceScoreBoard;
 
-    public JoinEventListener(PlayerScoreManager playerScoreManager, ExperienceScoreBoard experienceScoreBoard) {
+    public JoinEventListener(PlayerScoreManager playerScoreManager) {
         this.playerScoreManager = playerScoreManager;
-        this.experienceScoreBoard = experienceScoreBoard;
     }
 
     @EventHandler
@@ -24,7 +21,5 @@ public class JoinEventListener implements Listener {
         UUID playerID = event.getPlayer().getUniqueId();
 
         this.playerScoreManager.setPlayerId(playerID);
-
-        experienceScoreBoard.createExperienceBoard(event.getPlayer());
     }
 }
