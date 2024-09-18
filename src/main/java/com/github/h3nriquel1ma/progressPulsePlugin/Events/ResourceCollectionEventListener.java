@@ -1,7 +1,10 @@
 package com.github.h3nriquel1ma.progressPulsePlugin.Events;
 
 import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.PlayerScoreManager;
+import net.kyori.adventure.text.Component;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -22,8 +25,10 @@ public class ResourceCollectionEventListener implements Listener {
 
         if (isResource(resource)) {
             UUID playerId = event.getPlayer().getUniqueId();
+            Player player = event.getPlayer();
 
             playerScoreManager.incrementResourcePoints(playerId);
+            player.sendActionBar(Component.text(ChatColor.DARK_GREEN + "+1 XP in" + ChatColor.DARK_AQUA + "Resource" + ChatColor.DARK_GREEN + "!"));
         }
     }
 
