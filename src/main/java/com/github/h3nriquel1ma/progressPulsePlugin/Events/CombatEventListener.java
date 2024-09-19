@@ -29,7 +29,8 @@ public class CombatEventListener implements Listener {
 
             playerScoreManager.incrementCombatPoints(playerId);
 
-            damager.sendActionBar(Component.text(ChatColor.DARK_GREEN + "+1 XP in" + ChatColor.RED + "Combat" + ChatColor.DARK_GREEN + "!"));
+            damager.sendActionBar(Component.text(ChatColor.GOLD + "+1 XP in " + ChatColor.RED + "Combat" + ChatColor.GOLD + "!"));
+
         }
     }
 }

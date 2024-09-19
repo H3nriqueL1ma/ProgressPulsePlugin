@@ -4,3 +4,8 @@ version: 'alpha-v0.0.1'
 description: "A plugin that adds a progression system by level of actions such as mining, combat, building, and many others."
 main: com.github.h3nriquel1ma.progressPulsePlugin.ProgressPulsePlugin
 api-version: '1.18'
+
+commands:
+  skillsXP:
+    description: Returns the level of the player's skills (actions).
+    usage: /skillsXP

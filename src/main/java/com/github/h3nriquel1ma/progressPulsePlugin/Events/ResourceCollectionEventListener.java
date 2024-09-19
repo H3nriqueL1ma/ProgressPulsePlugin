@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.UUID;
 
+// Ouvinte de evento de quebra de blocos de recursos.
 public class ResourceCollectionEventListener implements Listener {
 
     private final PlayerScoreManager playerScoreManager;
@@ -28,7 +29,7 @@ public class ResourceCollectionEventListener implements Listener {
             Player player = event.getPlayer();
 
             playerScoreManager.incrementResourcePoints(playerId);
-            player.sendActionBar(Component.text(ChatColor.DARK_GREEN + "+1 XP in" + ChatColor.DARK_AQUA + "Resource" + ChatColor.DARK_GREEN + "!"));
+            player.sendActionBar(Component.text(ChatColor.GREEN + "+1 XP in " + ChatColor.GOLD + "Resource Collection" + ChatColor.GREEN + "!"));
         }
     }
 

@@ -6,6 +6,7 @@ public class PlayerData {
     private Integer miningPoints = 0;
     private Integer constrnPoints = 0;
     private Integer resCollPoints = 0;
+    private Integer fishingPoints = 0;
 
     public void incrementCombatPoints() {
         this.combatPoints++;
@@ -33,5 +34,12 @@ public class PlayerData {
     }
     public Integer getResCollPoints() {
         return resCollPoints;
+    }
+
+    public void incrementFishingPoints() {
+        this.fishingPoints++;
+    }
+    public Integer getFishingPoints() {
+        return fishingPoints;
     }
 }

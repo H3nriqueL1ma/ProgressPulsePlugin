@@ -87,4 +87,21 @@ public class PlayerScoreManager {
 
         return 0;
     }
+
+    public void incrementFishingPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            player.incrementFishingPoints();
+        }
+    }
+    public Integer getPlayerFishingPoints(UUID playerId) {
+        if (isPlayerIdExisting(playerId)) {
+            PlayerData player = playersData.get(playerId);
+
+            return player.getFishingPoints();
+        }
+
+        return 0;
+    }
 }

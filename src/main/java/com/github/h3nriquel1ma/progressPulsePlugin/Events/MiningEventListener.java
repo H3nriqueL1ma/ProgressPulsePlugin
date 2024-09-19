@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
-// Ouvinte de evento de ações de quebra de bloco.
+// Ouvinte de evento de ações de quebra de blocos de mineração.
 public class MiningEventListener implements Listener {
 
     private final PlayerScoreManager playerScoreManager;
@@ -32,7 +32,7 @@ public class MiningEventListener implements Listener {
                 Player player = event.getPlayer();
 
                 playerScoreManager.incrementMiningPoints(playerId);
-                player.sendActionBar(Component.text(ChatColor.DARK_GREEN + "+1 XP in" + ChatColor.BLUE + "Mining" + ChatColor.DARK_GREEN + "!"));
+                player.sendActionBar(Component.text(ChatColor.GRAY + "+1 XP in " + ChatColor.DARK_AQUA + "Mining" + ChatColor.GRAY + "!"));
             }
         }
     }

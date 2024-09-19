@@ -6,26 +6,24 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 
 import java.util.UUID;
 
-// Ouvinte de evento de blocos que são colocados pelo jogador.
-public class ConstructionEventListener implements Listener {
+public class FishingEventListener implements Listener {
 
     private final PlayerScoreManager playerScoreManager;
 
-    public ConstructionEventListener(PlayerScoreManager playerScoreManager) {
+    public FishingEventListener(PlayerScoreManager playerScoreManager) {
         this.playerScoreManager = playerScoreManager;
     }
 
     @EventHandler
-    public void onConstructionEvent(BlockPlaceEvent event) {
+    public void onFishing(PlayerFishEvent event) {
         UUID playerId = event.getPlayer().getUniqueId();
         Player player = event.getPlayer();
 
-        playerScoreManager.incrementConstrnPoints(playerId);
-        player.sendActionBar(Component.text(ChatColor.YELLOW + "+1 XP in " + ChatColor.BLUE + "Construction" + ChatColor.YELLOW + "!"));
-
+        playerScoreManager.incrementFishingPoints(playerId);
+        player.sendActionBar(Component.text(ChatColor.YELLOW + "+1 XP in " + ChatColor.AQUA + "Fishing" + ChatColor.YELLOW + "!"));
     }
 }
