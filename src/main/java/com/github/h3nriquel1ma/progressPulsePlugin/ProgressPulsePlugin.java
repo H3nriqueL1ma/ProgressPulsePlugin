@@ -1,7 +1,6 @@
 package com.github.h3nriquel1ma.progressPulsePlugin;
 
 import com.github.h3nriquel1ma.progressPulsePlugin.Commands.SkillsXpListCommand;
-import com.github.h3nriquel1ma.progressPulsePlugin.Events.*;
 import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.PlayerScoreManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
