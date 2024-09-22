@@ -74,5 +74,16 @@
             <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.h3nriquel1ma</groupId>
+            <artifactId>progress-pulse-plugin-core</artifactId>
+            <version>0.0.1-alpha_1.18.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.h3nriquel1ma</groupId>
+            <artifactId>progress-pulse-plugin-module</artifactId>
+            <version>0.0.1-alpha_1.18.2</version>
+        </dependency>
     </dependencies>
 </project>

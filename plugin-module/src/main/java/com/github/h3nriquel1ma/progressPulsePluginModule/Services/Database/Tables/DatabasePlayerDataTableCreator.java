@@ -1,25 +1,29 @@
-package com.github.h3nriquel1ma.progressPulsePluginModule.Services;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Tables;
 
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.CreationManager;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.CreationTableManager;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
 
-public class DatabasePlayerDataTableCreator extends CreationTableManager {
+public class DatabasePlayerDataTableCreator extends CreationTableManager implements CreationManager {
 
-    protected DatabasePlayerDataTableCreator(Connection connection, Plugin plugin) {
+    public DatabasePlayerDataTableCreator(Connection connection, Plugin plugin) {
         super(connection, plugin);
     }
 
     @Override
     public void create() {
         String sql = "CREATE TABLE IF NOT EXISTS playersData(" +
-                        "datasId TEXT PRIMARY KEY NOT NULL, " +
+                        "dataId TEXT PRIMARY KEY NOT NULL, " +
                         "combatPoints INTEGER NOT NULL, " +
                         "constructionPoints INTEGER NOT NULL, " +
                         "fishingPoints INTEGER NOT NULL, " +
                         "miningPoints INTEGER NOT NULL, " +
                         "resoureColPoints INTEGER NOT NULL, " +
+                        "FOREIGN KEY (playerId) REFERENCES players (playerId)" +
                         ");";
+
+        createTable(sql, "Player Data");
     }
 }

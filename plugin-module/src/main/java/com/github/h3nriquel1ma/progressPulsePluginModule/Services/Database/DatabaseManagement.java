@@ -1,7 +1,8 @@
-package com.github.h3nriquel1ma.progressPulsePluginModule.Services;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.ConnectionManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
