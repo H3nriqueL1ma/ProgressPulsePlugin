@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 // Ouvinte de evento de ações de combate.
@@ -19,8 +18,8 @@ public class CombatEventListener implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
 
-    public CombatEventListener(Connection connection, Plugin plugin) {
-        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
+    public CombatEventListener(Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
     }
 
     @EventHandler

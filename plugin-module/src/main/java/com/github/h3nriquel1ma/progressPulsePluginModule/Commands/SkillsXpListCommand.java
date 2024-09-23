@@ -1,9 +1,11 @@
 package com.github.h3nriquel1ma.progressPulsePluginModule.Commands;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.SelectManager;
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.SpacingUtil;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Models.PlayerData;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataSelect;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -14,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 // Comando que retorna o XP das skills do jogador.
@@ -22,10 +23,12 @@ public class SkillsXpListCommand implements CommandExecutor {
 
     private final SelectManager databasePlayerDataSelect;
     private final SpacingUtil spacingChatText;
+    private final LogUtil<String> loggerPlugin;
 
-    public SkillsXpListCommand(Connection connection, Plugin plugin, SpacingUtil spacingChatText) {
+    public SkillsXpListCommand(Plugin plugin, SpacingUtil spacingChatText) {
         this.spacingChatText = spacingChatText;
-        this.databasePlayerDataSelect = new DatabasePlayerDataSelect(connection, plugin);
+        this.databasePlayerDataSelect = new DatabasePlayerDataSelect(plugin);
+        this.loggerPlugin = new LoggerPlugin(plugin);
     }
 
     @Override
@@ -63,6 +66,8 @@ public class SkillsXpListCommand implements CommandExecutor {
                                         Component.text(spacingChatText.addSpacing("Res. Collecting:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
                                         Component.text(playerResPoints + "\n", TextColor.color(50, 205, 50)))
                 );
+            } else {
+                loggerPlugin.printErr("Error: playerData is null!");
             }
         }
 

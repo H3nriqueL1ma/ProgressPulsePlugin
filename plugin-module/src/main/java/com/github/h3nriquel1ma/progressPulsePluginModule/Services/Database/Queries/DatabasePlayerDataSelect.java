@@ -16,8 +16,8 @@ public class DatabasePlayerDataSelect extends SelectDataManager implements Selec
 
     private final LogUtil<String> loggerPlugin;
 
-    public DatabasePlayerDataSelect(Connection connection, Plugin plugin) {
-        super(connection, plugin);
+    public DatabasePlayerDataSelect(Plugin plugin) {
+        super(plugin);
         this.loggerPlugin = new LoggerPlugin(plugin);
     }
 

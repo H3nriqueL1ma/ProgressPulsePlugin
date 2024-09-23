@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 // Ouvinte de evento de blocos que são colocados pelo jogador.
@@ -18,8 +17,8 @@ public class ConstructionEventListener implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
 
-    public ConstructionEventListener(Connection connection, Plugin plugin) {
-        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
+    public ConstructionEventListener(Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
     }
 
     @EventHandler

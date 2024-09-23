@@ -45,12 +45,18 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>com.github.h3nriquel1ma:progress-pulse-plugin-core</include>
+                                    <include>com.github.h3nriquel1ma:progress-pulse-plugin-module</include>
+                                </includes>
+                            </artifactSet>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
-                                    <includes>
-                                        <include>META-INF/MANIFEST>MF</include>
-                                    </includes>
+                                    <excludes>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                    </excludes>
                                 </filter>
                             </filters>
                             <transformers>

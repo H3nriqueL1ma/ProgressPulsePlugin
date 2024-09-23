@@ -13,50 +13,43 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Table
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterCommands;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterListeners;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.SpacingChatText;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.sql.Connection;
 
 public final class ProgressPulsePlugin extends JavaPlugin {
 
-    private final ConnectionManager databaseManagement;
-    private final CreationManager databasePlayerTableCreator;
-    private final CreationManager databasePlayerDataTableCreator;
-    private final Register registerListeners;
-    private final Register registerCommands;
-    private final Connection connection;
-    private final SpacingUtil spacingChatText;
-    private final LogUtil<String> loggerPlugin;
+    private ConnectionManager databaseManagement;
+    private LogUtil<String> loggerPlugin;
 
-    public ProgressPulsePlugin(Connection connection, SpacingUtil spacingChatText) {
-        this.databasePlayerTableCreator = new DatabasePlayerTableCreator(this, connection);
-        this.databasePlayerDataTableCreator = new DatabasePlayerDataTableCreator(connection, this);
-        this.connection = connection;
-        this.spacingChatText = spacingChatText;
-        this.loggerPlugin = new LoggerPlugin(this);
-        this.registerCommands = new RegisterCommands(this);
-        this.registerListeners = new RegisterListeners(this);
-        this.databaseManagement = new DatabaseManagement(this);
-    }
+    public ProgressPulsePlugin() {}
 
     @Override
     public void onEnable() {
+        loggerPlugin = new LoggerPlugin(this);
         loggerPlugin.printInfo("ProgressPulse has been enabled!");
 
+        databaseManagement = new DatabaseManagement(this);
         databaseManagement.connect();
 
+        CreationManager databasePlayerTableCreator = new DatabasePlayerTableCreator(this);
         databasePlayerTableCreator.create();
+
+        CreationManager databasePlayerDataTableCreator = new DatabasePlayerDataTableCreator(this);
         databasePlayerDataTableCreator.create();
 
-        registerListeners.register(new JoinEventListener(connection, this),
-                                    new CombatEventListener(connection, this),
-                                    new ConstructionEventListener(connection, this),
-                                    new FishingEventListener(connection, this),
-                                    new MiningEventListener(connection, this),
-                                    new ResourceCollectionEventListener(connection, this));
+        Register registerListeners = new RegisterListeners(this);
+        registerListeners.register(new JoinEventListener(this),
+                                    new CombatEventListener(this),
+                                    new ConstructionEventListener(this),
+                                    new FishingEventListener(this),
+                                    new MiningEventListener(this),
+                                    new ResourceCollectionEventListener(this));
+
+        Register registerCommands = new RegisterCommands(this);
+        SpacingUtil spacingChatText = new SpacingChatText();
         registerCommands.register(
                 "skillsXP",
-                new SkillsXpListCommand(connection, this, spacingChatText)
+                new SkillsXpListCommand(this, spacingChatText)
         );
     }
 

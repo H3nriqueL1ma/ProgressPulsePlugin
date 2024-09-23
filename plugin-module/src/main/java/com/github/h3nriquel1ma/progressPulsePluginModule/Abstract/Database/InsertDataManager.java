@@ -1,6 +1,8 @@
 package com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database;
 
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.ConnectionManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.DatabaseManagement;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
@@ -10,16 +12,19 @@ import java.sql.SQLException;
 
 public abstract class InsertDataManager {
 
-    private final Connection connection;
     private final LogUtil<String> loggerPlugin;
+    private final ConnectionManager databaseManagement;
 
-    protected InsertDataManager(Connection connection, Plugin plugin) {
-        this.connection = connection;
+    protected InsertDataManager(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
+        this.databaseManagement = new DatabaseManagement(plugin);
     }
 
     public void insertData(String sql, String tableName, Object... params) {
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try {
+            Connection connection = databaseManagement.getConnection("progress.db");
+            PreparedStatement statement = connection.prepareStatement(sql);
+
             int index = 1;
 
             for (Object param : params) {

@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 // Ouvinte de evento de quebra de blocos de recursos.
@@ -19,8 +18,8 @@ public class ResourceCollectionEventListener implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
 
-    public ResourceCollectionEventListener(Connection connection, Plugin plugin) {
-        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
+    public ResourceCollectionEventListener(Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
     }
 
     @EventHandler

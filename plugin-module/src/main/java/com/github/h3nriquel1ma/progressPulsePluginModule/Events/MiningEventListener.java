@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 // Ouvinte de evento de ações de quebra de blocos de mineração.
@@ -19,8 +18,8 @@ public class MiningEventListener implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
 
-    public MiningEventListener(Connection connection, Plugin plugin) {
-        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
+    public MiningEventListener(Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
     }
 
     @EventHandler

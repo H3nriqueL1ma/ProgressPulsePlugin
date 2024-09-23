@@ -4,18 +4,16 @@ import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.Creat
 import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.CreationTableManager;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
-
 public class DatabasePlayerTableCreator extends CreationTableManager implements CreationManager {
 
-    public DatabasePlayerTableCreator(Plugin plugin, Connection connection) {
-        super(connection, plugin);
+    public DatabasePlayerTableCreator(Plugin plugin) {
+        super(plugin);
     }
 
     @Override
     public void create() {
         String sql = "CREATE TABLE IF NOT EXISTS players(" +
-                        "playerId TEXT PRIMARY KEY NOT NULL, " +
+                        "playerId TEXT PRIMARY KEY NOT NULL" +
                         ");";
 
         createTable(sql, "Players");

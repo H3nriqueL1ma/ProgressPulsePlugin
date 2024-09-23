@@ -10,15 +10,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 public class FishingEventListener implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
 
-    public FishingEventListener(Connection connection, Plugin plugin) {
-        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
+    public FishingEventListener(Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
     }
 
     @EventHandler

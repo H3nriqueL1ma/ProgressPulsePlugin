@@ -48,4 +48,16 @@ public class DatabaseManagement implements ConnectionManager {
             loggerPlugin.printErr("Error disconnecting the database: " + error.getMessage());
         }
     }
+
+    @Override
+    public Connection getConnection(String databaseName) {
+        try {
+            String url = "jdbc:sqlite:" + plugin.getDataFolder() + "/" + databaseName;
+
+            return DriverManager.getConnection(url);
+        } catch (SQLException error) {
+            loggerPlugin.printErr("Error getting database connection: " + error.getMessage());
+        }
+        return null;
+    }
 }

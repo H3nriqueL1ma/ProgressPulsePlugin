@@ -2,19 +2,22 @@ package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Quer
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.SelectManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.UpdateManager;
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.UpdateDataManager;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.util.UUID;
 
 public class DatabasePlayerDataUpdate extends UpdateDataManager implements UpdateManager {
 
     private final SelectManager databasePlayerDataSelect;
+    private final LogUtil<String> loggerPlugin;
 
-    public DatabasePlayerDataUpdate(Connection connection, Plugin plugin) {
-        super(connection, plugin);
-        this.databasePlayerDataSelect = new DatabasePlayerDataSelect(connection, plugin);
+    public DatabasePlayerDataUpdate(Plugin plugin) {
+        super(plugin);
+        this.databasePlayerDataSelect = new DatabasePlayerDataSelect(plugin);
+        this.loggerPlugin = new LoggerPlugin(plugin);
     }
 
     @Override
@@ -23,6 +26,8 @@ public class DatabasePlayerDataUpdate extends UpdateDataManager implements Updat
             String sql = "UPDATE ? FROM playersData WHERE playerID = ?";
 
             updateData(sql, "PlayersData", updateParam, playerId);
+        } else {
+            loggerPlugin.printErr("Error: PlayerId not exists!");
         }
     }
 }
