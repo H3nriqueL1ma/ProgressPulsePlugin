@@ -1,6 +1,7 @@
-package com.github.h3nriquel1ma.progressPulsePlugin.Events;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Events;
 
-import com.github.h3nriquel1ma.progressPulsePlugin.ExperienceScore.PlayerScoreManager;
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.UpdateManager;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataUpdate;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,17 +9,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
+import java.sql.Connection;
 import java.util.UUID;
 
 // Ouvinte de evento de ações de quebra de blocos de mineração.
 public class MiningEventListener implements Listener {
 
-    private final PlayerScoreManager playerScoreManager;
+    private final UpdateManager databasePlayerDataUpdate;
 
-    public MiningEventListener(PlayerScoreManager playerScoreManager) {
-        this.playerScoreManager = playerScoreManager;
+    public MiningEventListener(Connection connection, Plugin plugin) {
+        this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(connection, plugin);
     }
 
     @EventHandler
@@ -31,7 +33,7 @@ public class MiningEventListener implements Listener {
                 UUID playerId = event.getPlayer().getUniqueId();
                 Player player = event.getPlayer();
 
-                playerScoreManager.incrementMiningPoints(playerId);
+                databasePlayerDataUpdate.update(playerId, "miningPoints");
                 player.sendActionBar(Component.text(ChatColor.GRAY + "+1 XP in " + ChatColor.DARK_AQUA + "Mining" + ChatColor.GRAY + "!"));
             }
         }

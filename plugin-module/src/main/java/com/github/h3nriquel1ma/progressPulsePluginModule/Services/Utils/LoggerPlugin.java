@@ -1,4 +1,4 @@
-package com.github.h3nriquel1ma.progressPulsePluginModule.Services;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
 import org.bukkit.plugin.Plugin;

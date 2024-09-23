@@ -6,19 +6,20 @@ import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class InsertDataManager {
+public abstract class SelectDataManager {
 
     private final Connection connection;
     private final LogUtil<String> loggerPlugin;
 
-    protected InsertDataManager(Connection connection, Plugin plugin) {
+    protected SelectDataManager(Connection connection, Plugin plugin) {
         this.connection = connection;
         this.loggerPlugin = new LoggerPlugin(plugin);
     }
 
-    public void insertData(String sql, String tableName, Object... params) {
+    public ResultSet selectData(String sql, String tableName, Object... params) {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             int index = 1;
 
@@ -26,11 +27,15 @@ public abstract class InsertDataManager {
                 statement.setObject(index++, param);
             }
 
-            statement.executeUpdate();
+            ResultSet data = statement.executeQuery();
 
-            loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
+            loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
+
+            return data;
         } catch (SQLException error) {
-            loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
+            loggerPlugin.printErr("Error selecting data from " + tableName + " table: " + error.getMessage());
         }
+
+        return null;
     }
 }

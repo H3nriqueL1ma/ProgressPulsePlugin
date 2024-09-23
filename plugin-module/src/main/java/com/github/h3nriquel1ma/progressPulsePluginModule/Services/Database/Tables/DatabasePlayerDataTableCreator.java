@@ -15,15 +15,15 @@ public class DatabasePlayerDataTableCreator extends CreationTableManager impleme
     @Override
     public void create() {
         String sql = "CREATE TABLE IF NOT EXISTS playersData(" +
-                        "dataId TEXT PRIMARY KEY NOT NULL, " +
+                        "dataId INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT, " +
                         "combatPoints INTEGER NOT NULL, " +
                         "constructionPoints INTEGER NOT NULL, " +
                         "fishingPoints INTEGER NOT NULL, " +
                         "miningPoints INTEGER NOT NULL, " +
-                        "resoureColPoints INTEGER NOT NULL, " +
+                        "resourceColPoints INTEGER NOT NULL, " +
                         "FOREIGN KEY (playerId) REFERENCES players (playerId)" +
                         ");";
 
-        createTable(sql, "Player Data");
+        createTable(sql, "PlayersData");
     }
 }

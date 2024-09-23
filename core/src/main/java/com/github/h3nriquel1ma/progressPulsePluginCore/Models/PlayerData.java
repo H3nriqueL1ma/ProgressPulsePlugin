@@ -1,45 +1,39 @@
 package com.github.h3nriquel1ma.progressPulsePluginCore.Models;
 
 // Modelo de dados para o jogador (pontos de combate, mineração, construção, coleta de recursos, pesca, ...).
-public class PlayerData {
-    private Integer combatPoints = 0;
-    private Integer miningPoints = 0;
-    private Integer constrnPoints = 0;
-    private Integer resCollPoints = 0;
-    private Integer fishingPoints = 0;
 
-    public void incrementCombatPoints() {
-        this.combatPoints++;
+public class PlayerData {
+    private int combatPoints;
+    private int miningPoints;
+    private int constrnPoints;
+    private int resCollPoints;
+    private int fishingPoints;
+
+    public PlayerData(int combatPoints, int miningPoints, int constrnPoints, int resCollPoints, int fishingPoints) {
+        this.combatPoints = combatPoints;
+        this.miningPoints = miningPoints;
+        this.constrnPoints = constrnPoints;
+        this.resCollPoints = resCollPoints;
+        this.fishingPoints = fishingPoints;
     }
-    public Integer getCombatPoints() {
+
+    public int getCombatPoints() {
         return combatPoints;
     }
 
-    public void incrementMiningPoints() {
-        this.miningPoints++;
-    }
-    public Integer getMiningPoints() {
-        return miningPoints;
-    }
-
-    public void incrementConstrnPoints() {
-        this.constrnPoints++;
-    }
-    public Integer getConstrnPoints() {
+    public int getConstrnPoints() {
         return constrnPoints;
     }
 
-    public void incrementResCollPoints() {
-        this.resCollPoints++;
-    }
-    public Integer getResCollPoints() {
-        return resCollPoints;
+    public int getFishingPoints() {
+        return fishingPoints;
     }
 
-    public void incrementFishingPoints() {
-        this.fishingPoints++;
+    public int getMiningPoints() {
+        return miningPoints;
     }
-    public Integer getFishingPoints() {
-        return fishingPoints;
+
+    public int getResCollPoints() {
+        return resCollPoints;
     }
 }

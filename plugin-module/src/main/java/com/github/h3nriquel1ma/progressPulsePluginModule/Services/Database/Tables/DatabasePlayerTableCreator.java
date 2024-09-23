@@ -18,6 +18,6 @@ public class DatabasePlayerTableCreator extends CreationTableManager implements 
                         "playerId TEXT PRIMARY KEY NOT NULL, " +
                         ");";
 
-        createTable(sql, "Player");
+        createTable(sql, "Players");
     }
 }

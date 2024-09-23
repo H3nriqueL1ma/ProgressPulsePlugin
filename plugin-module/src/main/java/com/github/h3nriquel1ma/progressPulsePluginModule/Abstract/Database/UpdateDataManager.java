@@ -8,17 +8,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public abstract class InsertDataManager {
+public abstract class UpdateDataManager {
 
     private final Connection connection;
     private final LogUtil<String> loggerPlugin;
 
-    protected InsertDataManager(Connection connection, Plugin plugin) {
+    protected UpdateDataManager(Connection connection, Plugin plugin) {
         this.connection = connection;
         this.loggerPlugin = new LoggerPlugin(plugin);
     }
 
-    public void insertData(String sql, String tableName, Object... params) {
+    public void updateData(String sql, String tableName, Object... params) {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             int index = 1;
 
@@ -28,9 +28,9 @@ public abstract class InsertDataManager {
 
             statement.executeUpdate();
 
-            loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
+            loggerPlugin.printInfo("Updating data in " + tableName + "successfully");
         } catch (SQLException error) {
-            loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
+            loggerPlugin.printErr("Error updating data in " + tableName + "table: " + error.getMessage());
         }
     }
 }

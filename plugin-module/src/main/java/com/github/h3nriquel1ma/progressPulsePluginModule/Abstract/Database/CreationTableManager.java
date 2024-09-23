@@ -1,13 +1,12 @@
 package com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database;
 
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.CreationManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.LoggerPlugin;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public abstract class CreationTableManager {
 
@@ -20,8 +19,8 @@ public abstract class CreationTableManager {
     }
 
     protected void createTable(String sql, String tableName) {
-        try (Statement statement = connection.createStatement()) {
-           statement.execute(sql);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+           statement.execute();
 
            loggerPlugin.printInfo(tableName + " table created");
         } catch (SQLException error) {
