@@ -34,7 +34,7 @@ public class SkillsXpListCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
-            UUID playerId = player.getUniqueId();
+            String playerId = player.getUniqueId().toString();
             String playerName = player.getName();
 
             PlayerData playerData = databasePlayerDataSelect.select(playerId);

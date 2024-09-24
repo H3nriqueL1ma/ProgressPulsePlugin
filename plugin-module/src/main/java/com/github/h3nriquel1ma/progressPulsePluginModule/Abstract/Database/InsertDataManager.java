@@ -27,6 +27,17 @@ public abstract class InsertDataManager {
 
             int index = 1;
 
+            StringBuilder sqlWithValues = new StringBuilder(sql);
+            for (Object param : params) {
+                String paramValue = param instanceof String ? "'" + param + "'" : param.toString();
+                int placeholderIndex = sqlWithValues.indexOf("?");
+                if (placeholderIndex != -1) {
+                    sqlWithValues.replace(placeholderIndex, placeholderIndex + 1, paramValue);
+                }
+            }
+            // Log da SQL completa
+            loggerPlugin.printInfo("Executing SQL: " + sqlWithValues.toString());
+
             for (Object param : params) {
                 statement.setObject(index++, param);
             }
@@ -36,6 +47,7 @@ public abstract class InsertDataManager {
             loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
         } catch (SQLException error) {
             loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 }

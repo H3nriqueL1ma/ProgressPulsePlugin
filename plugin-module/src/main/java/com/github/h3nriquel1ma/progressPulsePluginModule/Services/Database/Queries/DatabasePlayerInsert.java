@@ -7,8 +7,6 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.Inser
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-
 public class DatabasePlayerInsert extends InsertDataManager implements InsertManager {
 
     private final SelectManager databasePlayerDataSelect;
@@ -21,7 +19,7 @@ public class DatabasePlayerInsert extends InsertDataManager implements InsertMan
     }
 
     @Override
-    public void insert(UUID playerId) {
+    public void insert(String playerId) {
         if (databasePlayerDataSelect.select(playerId) == null) {
             String sql = "INSERT INTO players(playerId) VALUES(?);";
 

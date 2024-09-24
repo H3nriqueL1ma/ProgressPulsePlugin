@@ -11,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-
 // Ouvinte de evento de quebra de blocos de recursos.
 public class ResourceCollectionEventListener implements Listener {
 
@@ -27,7 +25,7 @@ public class ResourceCollectionEventListener implements Listener {
         Material resource = event.getBlock().getType();
 
         if (isResource(resource)) {
-            UUID playerId = event.getPlayer().getUniqueId();
+            String playerId = event.getPlayer().getUniqueId().toString();
             Player player = event.getPlayer();
 
             databasePlayerDataUpdate.update(playerId, "resourceColPoints");

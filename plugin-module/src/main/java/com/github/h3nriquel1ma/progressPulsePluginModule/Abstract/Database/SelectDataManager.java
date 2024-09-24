@@ -29,15 +29,12 @@ public abstract class SelectDataManager {
                 statement.setObject(index++, param);
             }
 
-            ResultSet data = statement.executeQuery();
+            //loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
 
-            loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
-
-            return data;
+            return statement.executeQuery();
         } catch (SQLException error) {
             loggerPlugin.printErr("Error selecting data from " + tableName + " table: " + error.getMessage());
+            throw new RuntimeException(error);
         }
-
-        return null;
     }
 }

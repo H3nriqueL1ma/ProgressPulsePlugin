@@ -9,6 +9,9 @@ public class PlayerData {
     private int resCollPoints;
     private int fishingPoints;
 
+    public PlayerData() {
+    }
+
     public PlayerData(int combatPoints, int miningPoints, int constrnPoints, int resCollPoints, int fishingPoints) {
         this.combatPoints = combatPoints;
         this.miningPoints = miningPoints;

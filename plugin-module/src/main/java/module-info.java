@@ -12,4 +12,5 @@ open module progress.pulse.plugin.module {
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin;
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Events;
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Commands;
+    exports com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads;
 }

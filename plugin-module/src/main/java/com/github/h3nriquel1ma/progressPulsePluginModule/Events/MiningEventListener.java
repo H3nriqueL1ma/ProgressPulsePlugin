@@ -11,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-
 // Ouvinte de evento de ações de quebra de blocos de mineração.
 public class MiningEventListener implements Listener {
 
@@ -29,7 +27,7 @@ public class MiningEventListener implements Listener {
 
         if (isPickaxeItem(itemPlayerHand)) {
             if (isOreOrMineBlock(blockType)) {
-                UUID playerId = event.getPlayer().getUniqueId();
+                String playerId = event.getPlayer().getUniqueId().toString();
                 Player player = event.getPlayer();
 
                 databasePlayerDataUpdate.update(playerId, "miningPoints");

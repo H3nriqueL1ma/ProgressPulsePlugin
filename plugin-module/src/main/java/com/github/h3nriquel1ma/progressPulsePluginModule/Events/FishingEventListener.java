@@ -22,7 +22,7 @@ public class FishingEventListener implements Listener {
 
     @EventHandler
     public void onFishing(PlayerFishEvent event) {
-        UUID playerId = event.getPlayer().getUniqueId();
+        String playerId = event.getPlayer().getUniqueId().toString();
         Player player = event.getPlayer();
 
         databasePlayerDataUpdate.update(playerId, "fishingPoints");

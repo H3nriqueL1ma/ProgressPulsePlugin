@@ -21,7 +21,7 @@ public class DatabasePlayerDataInsert extends InsertDataManager implements Inser
     }
 
     @Override
-    public void insert(int combatPoints, int constructionPoints, int fishingPoints, int miningPoints, int resourceColPoints, UUID playerId) {
+    public void insert(int combatPoints, int constructionPoints, int fishingPoints, int miningPoints, int resourceColPoints, String playerId) {
         if (databasePlayerDataSelect.select(playerId) != null) {
             String sql = "INSERT INTO playersData(combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints, playerId) VALUES(?, ?, ?, ?, ?, ?);";
 

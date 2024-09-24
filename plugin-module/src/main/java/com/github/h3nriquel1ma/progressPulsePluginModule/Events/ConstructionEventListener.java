@@ -10,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-
 // Ouvinte de evento de blocos que são colocados pelo jogador.
 public class ConstructionEventListener implements Listener {
 
@@ -23,7 +21,7 @@ public class ConstructionEventListener implements Listener {
 
     @EventHandler
     public void onConstructionEvent(BlockPlaceEvent event) {
-        UUID playerId = event.getPlayer().getUniqueId();
+        String playerId = event.getPlayer().getUniqueId().toString();
         Player player = event.getPlayer();
 
         databasePlayerDataUpdate.update(playerId, "constructionPoints");

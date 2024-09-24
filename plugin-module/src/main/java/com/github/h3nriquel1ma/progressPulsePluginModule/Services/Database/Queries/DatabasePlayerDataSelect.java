@@ -7,10 +7,8 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.Selec
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 public class DatabasePlayerDataSelect extends SelectDataManager implements SelectManager {
 
@@ -22,12 +20,12 @@ public class DatabasePlayerDataSelect extends SelectDataManager implements Selec
     }
 
     @Override
-    public PlayerData select(UUID playerId) {
-        String sql = "SELECT combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints FROM playersData WHERE playerId = ?;";
-
-        ResultSet playerData = selectData(sql, "PlayersData", playerId);
-
+    public PlayerData select(String playerId) {
         try {
+            String sql = "SELECT combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints FROM playersData WHERE playerId = ?;";
+
+            ResultSet playerData = selectData(sql, "PlayersData", playerId);
+
             if (playerData.next()) {
                 int combatPoints = playerData.getInt("combatPoints");
                 int constructionPoints = playerData.getInt("constructionPoints");
@@ -36,11 +34,12 @@ public class DatabasePlayerDataSelect extends SelectDataManager implements Selec
                 int resourceColPoints = playerData.getInt("resourceColPoints");
 
                 return new PlayerData(combatPoints, miningPoints, constructionPoints, resourceColPoints, fishingPoints);
+            } else {
+                return null;
             }
         } catch (SQLException error) {
             loggerPlugin.printErr("Error returning the player data from the table: " + error.getMessage());
+            throw new RuntimeException(error);
         }
-
-        return null;
     }
 }

@@ -21,7 +21,7 @@ public class DatabasePlayerDataUpdate extends UpdateDataManager implements Updat
     }
 
     @Override
-    public void update(UUID playerId, String updateParam) {
+    public void update(String playerId, String updateParam) {
         if (databasePlayerDataSelect.select(playerId) != null) {
             String sql = "UPDATE ? FROM playersData WHERE playerID = ?";
 

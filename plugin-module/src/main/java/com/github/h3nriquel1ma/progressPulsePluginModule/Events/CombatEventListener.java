@@ -11,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-
 // Ouvinte de evento de ações de combate.
 public class CombatEventListener implements Listener {
 
@@ -27,7 +25,7 @@ public class CombatEventListener implements Listener {
         Entity damager = event.getDamager();
 
         if (damager instanceof Player) {
-            UUID playerId = damager.getUniqueId();
+            String playerId = damager.getUniqueId().toString();
 
             databasePlayerDataUpdate.update(playerId, "combatPoints");
             damager.sendActionBar(Component.text(ChatColor.GOLD + "+1 XP in " + ChatColor.RED + "Combat" + ChatColor.GOLD + "!"));
