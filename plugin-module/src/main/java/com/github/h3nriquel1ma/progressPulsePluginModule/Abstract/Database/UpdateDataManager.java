@@ -9,7 +9,6 @@ import org.bukkit.plugin.Plugin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.concurrent.CompletableFuture;
 
 public abstract class UpdateDataManager {
 
@@ -21,23 +20,21 @@ public abstract class UpdateDataManager {
         this.databaseManagement = new DatabaseManagement(plugin);
     }
 
-    public CompletableFuture<Void> updateData(String sql, String tableName, Object... params) {
-        return CompletableFuture.runAsync(() -> {
-            try (Connection connection = databaseManagement.getConnection("progress.db")) {
-                PreparedStatement statement = connection.prepareStatement(sql);
+    public void updateData(String sql, String tableName, Object... params) {
+        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+            PreparedStatement statement = connection.prepareStatement(sql);
 
-                int index = 1;
+            int index = 1;
 
-                for (Object param : params) {
-                    statement.setObject(index++, param);
-                }
-
-                statement.executeUpdate();
-
-                loggerPlugin.printInfo("Updating data in " + tableName + "successfully");
-            } catch (SQLException error) {
-                loggerPlugin.printErr("Error updating data in " + tableName + "table: " + error.getMessage());
+            for (Object param : params) {
+                statement.setObject(index++, param);
             }
-        });
+
+            statement.executeUpdate();
+
+            loggerPlugin.printInfo("Updating data in " + tableName + "successfully");
+        } catch (SQLException error) {
+            loggerPlugin.printErr("Error updating data in " + tableName + "table: " + error.getMessage());
+        }
     }
 }

@@ -7,8 +7,6 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.Inser
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
-import java.util.concurrent.CompletableFuture;
-
 public class DatabasePlayerInsert extends InsertDataManager implements InsertManager {
 
     private final SelectManager databasePlayerDataSelect;
@@ -21,15 +19,13 @@ public class DatabasePlayerInsert extends InsertDataManager implements InsertMan
     }
 
     @Override
-    public CompletableFuture<Void> insert(int combatPoints, int constructionPoints, int fishingPoints, int miningPoints, int resourceColPoints, String playerId) {
-        return databasePlayerDataSelect.select(playerId).thenAccept(playerData -> {
-            if (playerData == null) {
-                String sql = "INSERT INTO players(playerId, combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints) VALUES(?, ?, ?, ?, ?, ?);";
+    public void insert(int combatPoints, int constructionPoints, int fishingPoints, int miningPoints, int resourceColPoints, String playerId) {
+        if (databasePlayerDataSelect.select(playerId) == null) {
+            String sql = "INSERT INTO players(playerId, combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints) VALUES(?, ?, ?, ?, ?, ?);";
 
-                insertData(sql, "Players", playerId, combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints);
-            } else {
-                loggerPlugin.printErr("Error: PlayerId already registered!");
-            }
-        });
+            insertData(sql, "Players", playerId, combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints);
+        } else {
+            loggerPlugin.printErr("Error: PlayerId already registered!");
+        }
     }
 }

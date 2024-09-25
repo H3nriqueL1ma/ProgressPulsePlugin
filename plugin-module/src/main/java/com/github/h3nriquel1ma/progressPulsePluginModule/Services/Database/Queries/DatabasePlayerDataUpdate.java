@@ -7,9 +7,6 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database.Updat
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
 import org.bukkit.plugin.Plugin;
 
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-
 public class DatabasePlayerDataUpdate extends UpdateDataManager implements UpdateManager {
 
     private final SelectManager databasePlayerDataSelect;
@@ -22,15 +19,13 @@ public class DatabasePlayerDataUpdate extends UpdateDataManager implements Updat
     }
 
     @Override
-    public CompletableFuture<Void> update(String playerId, String updateParam) {
-        return CompletableFuture.runAsync(() -> {
-            if (databasePlayerDataSelect.select(playerId) != null) {
-                String sql = "UPDATE ? FROM players WHERE playerID = ?";
+    public void update(String playerId, String updateParam) {
+        if (databasePlayerDataSelect.select(playerId) != null) {
+            String sql = "UPDATE players SET ? = ? + 1 WHERE playerID = ?";
 
-                updateData(sql, "Players", updateParam, playerId);
-            } else {
-                loggerPlugin.printErr("Error: PlayerId not exists!");
-            }
-        });
+            updateData(sql, "Players", updateParam, updateParam, playerId);
+        } else {
+            loggerPlugin.printErr("Error: PlayerId not exists!");
+        }
     }
 }

@@ -9,7 +9,6 @@ import org.bukkit.plugin.Plugin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.concurrent.CompletableFuture;
 
 public abstract class CreationTableManager {
 
@@ -21,16 +20,14 @@ public abstract class CreationTableManager {
         this.databaseManagement = new DatabaseManagement(plugin);
     }
 
-    protected CompletableFuture<Void> createTable(String sql, String tableName) {
-        return CompletableFuture.runAsync(() -> {
-            try (Connection connection = databaseManagement.getConnection("progress.db")) {
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.execute();
+    protected void createTable(String sql, String tableName) {
+        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.execute();
 
-                loggerPlugin.printInfo(tableName + " table created");
-            } catch (SQLException error) {
-                loggerPlugin.printErr("Error creating " + tableName + " table: " + error.getMessage());
-            }
-        });
+            loggerPlugin.printInfo(tableName + " table created");
+        } catch (SQLException error) {
+            loggerPlugin.printErr("Error creating " + tableName + " table: " + error.getMessage());
+        }
     }
 }

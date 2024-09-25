@@ -39,22 +39,14 @@ public class SkillsXpListCommand implements CommandExecutor {
             String playerId = player.getUniqueId().toString();
             String playerName = player.getName();
 
-            CompletableFuture<PlayerData> playerData = databasePlayerDataSelect.select(playerId);
-            PlayerData playerDataExtracted;
+            PlayerData playerData = databasePlayerDataSelect.select(playerId);
 
-            try {
-                playerDataExtracted = playerData.get();
-            } catch (InterruptedException | ExecutionException error) {
-                loggerPlugin.printErr("Error executing the CompletableFuture for player data: " + error.getMessage());
-                throw new RuntimeException(error);
-            }
-
-            if (playerDataExtracted != null) {
-                int playerCombatPoints = playerDataExtracted.getCombatPoints();
-                int playerConstructionPoints = playerDataExtracted.getConstrnPoints();
-                int playerFishingPoints = playerDataExtracted.getFishingPoints();
-                int playerMiningPoints = playerDataExtracted.getMiningPoints();
-                int playerResPoints = playerDataExtracted.getResCollPoints();
+            if (playerData != null) {
+                int playerCombatPoints = playerData.getCombatPoints();
+                int playerConstructionPoints = playerData.getConstrnPoints();
+                int playerFishingPoints = playerData.getFishingPoints();
+                int playerMiningPoints = playerData.getMiningPoints();
+                int playerResPoints = playerData.getResCollPoints();
 
                 player.sendMessage(
                         Component.text()

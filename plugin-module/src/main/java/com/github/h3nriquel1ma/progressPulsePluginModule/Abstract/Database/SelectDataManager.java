@@ -7,7 +7,6 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPl
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
-import java.util.concurrent.CompletableFuture;
 
 public abstract class SelectDataManager {
 
@@ -19,24 +18,22 @@ public abstract class SelectDataManager {
         this.databaseManagement = new DatabaseManagement(plugin);
     }
 
-    public CompletableFuture<ResultSet> selectData(String sql, String tableName, Object... params) {
-        return CompletableFuture.supplyAsync(() -> {
-            try (Connection connection = databaseManagement.getConnection("progress.db")) {
-                PreparedStatement statement = connection.prepareStatement(sql);
+    public ResultSet selectData(String sql, String tableName, Object... params) {
+        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+            PreparedStatement statement = connection.prepareStatement(sql);
 
-                int index = 1;
+            int index = 1;
 
-                for (Object param : params) {
-                    statement.setObject(index++, param);
-                }
-
-                //loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
-
-                return statement.executeQuery();
-            } catch (SQLException error) {
-                loggerPlugin.printErr("Error selecting data from " + tableName + " table: " + error.getMessage());
-                throw new RuntimeException(error);
+            for (Object param : params) {
+                statement.setObject(index++, param);
             }
-        });
+
+            //loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
+
+            return statement.executeQuery();
+        } catch (SQLException error) {
+            loggerPlugin.printErr("Error selecting data from " + tableName + " table: " + error.getMessage());
+            throw new RuntimeException(error);
+        }
     }
 }

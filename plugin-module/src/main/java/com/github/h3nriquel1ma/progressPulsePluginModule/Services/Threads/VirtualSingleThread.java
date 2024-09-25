@@ -5,10 +5,10 @@ import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads.Virtua
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class VirtualThreadPool implements VirtualThreadManager {
+public class VirtualSingleThread implements VirtualThreadManager {
 
     @Override
-    public ExecutorService newPoolExecutor(int threadsNumber) {
-        return Executors.newFixedThreadPool(threadsNumber);
+    public ExecutorService newSingleExecutor() {
+        return Executors.newSingleThreadExecutor();
     }
 }
