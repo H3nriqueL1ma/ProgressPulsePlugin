@@ -17,6 +17,8 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 // Comando que retorna o XP das skills do jogador.
 public class SkillsXpListCommand implements CommandExecutor {
@@ -37,14 +39,22 @@ public class SkillsXpListCommand implements CommandExecutor {
             String playerId = player.getUniqueId().toString();
             String playerName = player.getName();
 
-            PlayerData playerData = databasePlayerDataSelect.select(playerId);
+            CompletableFuture<PlayerData> playerData = databasePlayerDataSelect.select(playerId);
+            PlayerData playerDataExtracted;
 
-            if (playerData != null) {
-                int playerCombatPoints = playerData.getCombatPoints();
-                int playerConstructionPoints = playerData.getConstrnPoints();
-                int playerFishingPoints = playerData.getFishingPoints();
-                int playerMiningPoints = playerData.getMiningPoints();
-                int playerResPoints = playerData.getResCollPoints();
+            try {
+                playerDataExtracted = playerData.get();
+            } catch (InterruptedException | ExecutionException error) {
+                loggerPlugin.printErr("Error executing the CompletableFuture for player data: " + error.getMessage());
+                throw new RuntimeException(error);
+            }
+
+            if (playerDataExtracted != null) {
+                int playerCombatPoints = playerDataExtracted.getCombatPoints();
+                int playerConstructionPoints = playerDataExtracted.getConstrnPoints();
+                int playerFishingPoints = playerDataExtracted.getFishingPoints();
+                int playerMiningPoints = playerDataExtracted.getMiningPoints();
+                int playerResPoints = playerDataExtracted.getResCollPoints();
 
                 player.sendMessage(
                         Component.text()

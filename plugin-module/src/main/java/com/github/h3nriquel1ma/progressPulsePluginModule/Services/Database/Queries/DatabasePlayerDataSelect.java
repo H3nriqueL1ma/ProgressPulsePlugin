@@ -9,6 +9,8 @@ import org.bukkit.plugin.Plugin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class DatabasePlayerDataSelect extends SelectDataManager implements SelectManager {
 
@@ -20,26 +22,32 @@ public class DatabasePlayerDataSelect extends SelectDataManager implements Selec
     }
 
     @Override
-    public PlayerData select(String playerId) {
-        try {
-            String sql = "SELECT combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints FROM playersData WHERE playerId = ?;";
+    public CompletableFuture<PlayerData> select(String playerId) {
+        return CompletableFuture.supplyAsync(() -> {
+            String sql = "SELECT combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints FROM players WHERE playerId = ?;";
 
-            ResultSet playerData = selectData(sql, "PlayersData", playerId);
+            try {
+                CompletableFuture<ResultSet> playerData = selectData(sql, "Players", playerId);
+                ResultSet playerDataExtracted = playerData.get();
 
-            if (playerData.next()) {
-                int combatPoints = playerData.getInt("combatPoints");
-                int constructionPoints = playerData.getInt("constructionPoints");
-                int fishingPoints = playerData.getInt("fishingPoints");
-                int miningPoints = playerData.getInt("miningPoints");
-                int resourceColPoints = playerData.getInt("resourceColPoints");
+                if (playerDataExtracted.next()) {
+                    int combatPoints = playerDataExtracted.getInt("combatPoints");
+                    int constructionPoints = playerDataExtracted.getInt("constructionPoints");
+                    int fishingPoints = playerDataExtracted.getInt("fishingPoints");
+                    int miningPoints = playerDataExtracted.getInt("miningPoints");
+                    int resourceColPoints = playerDataExtracted.getInt("resourceColPoints");
 
-                return new PlayerData(combatPoints, miningPoints, constructionPoints, resourceColPoints, fishingPoints);
-            } else {
-                return null;
+                    return new PlayerData(combatPoints, miningPoints, constructionPoints, resourceColPoints, fishingPoints);
+                } else {
+                    return null;
+                }
+            } catch (SQLException error) {
+                loggerPlugin.printErr("Error returning the player data from the table: " + error.getMessage());
+                throw new RuntimeException(error);
+            } catch (ExecutionException | InterruptedException error) {
+                loggerPlugin.printErr("Error executing the CompletableFuture for the player data: " + error.getMessage());
+                throw new RuntimeException(error);
             }
-        } catch (SQLException error) {
-            loggerPlugin.printErr("Error returning the player data from the table: " + error.getMessage());
-            throw new RuntimeException(error);
-        }
+        });
     }
 }

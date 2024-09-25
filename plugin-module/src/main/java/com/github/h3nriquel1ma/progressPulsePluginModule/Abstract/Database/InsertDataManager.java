@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class InsertDataManager {
 
@@ -20,34 +21,24 @@ public abstract class InsertDataManager {
         this.databaseManagement = new DatabaseManagement(plugin);
     }
 
-    public void insertData(String sql, String tableName, Object... params) {
-        try {
-            Connection connection = databaseManagement.getConnection("progress.db");
-            PreparedStatement statement = connection.prepareStatement(sql);
+    public CompletableFuture<Void> insertData(String sql, String tableName, Object... params) {
+        return CompletableFuture.runAsync(() -> {
+            try (Connection connection = databaseManagement.getConnection("progress.db")) {
+                PreparedStatement statement = connection.prepareStatement(sql);
 
-            int index = 1;
+                int index = 1;
 
-            StringBuilder sqlWithValues = new StringBuilder(sql);
-            for (Object param : params) {
-                String paramValue = param instanceof String ? "'" + param + "'" : param.toString();
-                int placeholderIndex = sqlWithValues.indexOf("?");
-                if (placeholderIndex != -1) {
-                    sqlWithValues.replace(placeholderIndex, placeholderIndex + 1, paramValue);
+                for (Object param : params) {
+                    statement.setObject(index++, param);
                 }
+
+                statement.executeUpdate();
+
+                loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
+            } catch (SQLException error) {
+                loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
+                throw new RuntimeException(error);
             }
-            // Log da SQL completa
-            loggerPlugin.printInfo("Executing SQL: " + sqlWithValues.toString());
-
-            for (Object param : params) {
-                statement.setObject(index++, param);
-            }
-
-            statement.executeUpdate();
-
-            loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
-        } catch (SQLException error) {
-            loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
-            throw new RuntimeException(error);
-        }
+        });
     }
 }

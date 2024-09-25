@@ -1,11 +1,11 @@
 package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads;
 
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads.ThreadPoolManager;
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads.VirtualThreadPoolManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ThreadPool implements ThreadPoolManager {
+public class VirtualThreadPool implements VirtualThreadPoolManager {
 
     @Override
     public ExecutorService newExecutor(int threadsNumber) {
