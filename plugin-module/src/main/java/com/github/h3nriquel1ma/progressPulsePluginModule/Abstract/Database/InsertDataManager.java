@@ -17,11 +17,11 @@ public abstract class InsertDataManager {
 
     protected InsertDataManager(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
-        this.databaseManagement = new DatabaseManagement(plugin);
+        this.databaseManagement = DatabaseManagement.getInstance(plugin);
     }
 
     public void insertData(String sql, String tableName, Object... params) {
-        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+        try (Connection connection = databaseManagement.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             int index = 1;
@@ -32,7 +32,7 @@ public abstract class InsertDataManager {
 
             statement.executeUpdate();
 
-            loggerPlugin.printInfo("Inserting data in " + tableName + " successfully");
+            loggerPlugin.printInfo("Inserting data in " + tableName + " successfully!");
         } catch (SQLException error) {
             loggerPlugin.printErr("Error inserting data in " + tableName + " table: " + error.getMessage());
             throw new RuntimeException(error);

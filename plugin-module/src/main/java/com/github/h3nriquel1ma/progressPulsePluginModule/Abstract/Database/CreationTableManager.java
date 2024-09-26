@@ -17,15 +17,15 @@ public abstract class CreationTableManager {
 
     protected CreationTableManager(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
-        this.databaseManagement = new DatabaseManagement(plugin);
+        this.databaseManagement = DatabaseManagement.getInstance(plugin);
     }
 
     protected void createTable(String sql, String tableName) {
-        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+        try (Connection connection = databaseManagement.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.execute();
 
-            loggerPlugin.printInfo(tableName + " table created");
+            loggerPlugin.printInfo(tableName + " table created!");
         } catch (SQLException error) {
             loggerPlugin.printErr("Error creating " + tableName + " table: " + error.getMessage());
         }

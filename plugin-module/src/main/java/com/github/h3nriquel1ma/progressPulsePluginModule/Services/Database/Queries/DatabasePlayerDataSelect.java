@@ -23,9 +23,7 @@ public class DatabasePlayerDataSelect extends SelectDataManager implements Selec
     public PlayerData select(String playerId) {
         String sql = "SELECT combatPoints, constructionPoints, fishingPoints, miningPoints, resourceColPoints FROM players WHERE playerId = ?;";
 
-        try {
-            ResultSet playerData = selectData(sql, "Players", playerId);
-
+        try (ResultSet playerData = selectData(sql, "Players", playerId)) {
             if (playerData.next()) {
                 int combatPoints = playerData.getInt("combatPoints");
                 int constructionPoints = playerData.getInt("constructionPoints");

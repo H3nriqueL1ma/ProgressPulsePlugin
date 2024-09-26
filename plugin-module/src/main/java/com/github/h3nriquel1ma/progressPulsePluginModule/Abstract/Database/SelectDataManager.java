@@ -15,11 +15,11 @@ public abstract class SelectDataManager {
 
     protected SelectDataManager(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
-        this.databaseManagement = new DatabaseManagement(plugin);
+        this.databaseManagement = DatabaseManagement.getInstance(plugin);
     }
 
     public ResultSet selectData(String sql, String tableName, Object... params) {
-        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+        try (Connection connection = databaseManagement.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             int index = 1;
@@ -27,8 +27,6 @@ public abstract class SelectDataManager {
             for (Object param : params) {
                 statement.setObject(index++, param);
             }
-
-            //loggerPlugin.printInfo("Selecting data from " + tableName + " successfully");
 
             return statement.executeQuery();
         } catch (SQLException error) {

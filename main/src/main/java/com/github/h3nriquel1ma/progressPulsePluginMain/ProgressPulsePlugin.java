@@ -29,17 +29,19 @@ public final class ProgressPulsePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         VirtualThreadManager virtualSingleThread = new VirtualSingleThread();
-        CreationManager databasePlayerTableCreator = new DatabasePlayerTableCreator(this);
         VirtualTaskManager virtualThreadTask = new VirtualThreadTask();
+
+        CreationManager databasePlayerTableCreator = new DatabasePlayerTableCreator(this);
+        databaseManagement = DatabaseManagement.getInstance(this);
+
         Register registerListeners = new RegisterListeners(this);
         Register registerCommands = new RegisterCommands(this);
+
         SpacingUtil spacingChatText = new SpacingChatText();
+
         loggerPlugin = new LoggerPlugin(this);
-        databaseManagement = new DatabaseManagement(this);
 
         loggerPlugin.printInfo("ProgressPulse has been enabled!");
-
-        databaseManagement.connect();
 
         ExecutorService singleExecutor = virtualSingleThread.newSingleExecutor();
         virtualThreadTask.execute(databasePlayerTableCreator::create, singleExecutor);

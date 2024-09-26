@@ -11,53 +11,50 @@ import java.sql.SQLException;
 
 public class DatabaseManagement implements ConnectionManager {
 
-    private final Plugin plugin;
+    private static DatabaseManagement instance;
     private Connection connection;
     private final LogUtil<String> loggerPlugin;
 
-    public DatabaseManagement(Plugin plugin) {
-        this.plugin = plugin;
+    private DatabaseManagement(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
-    }
 
-    @Override
-    public void connect() {
         try {
             if (!plugin.getDataFolder().exists()) {
                 plugin.getDataFolder().mkdir();
             }
 
-            String url = "jdbc:sqlite:" + plugin.getDataFolder() + "/progress.db";
-            connection = DriverManager.getConnection(url);
-
-            loggerPlugin.printInfo("Database connection established");
-        } catch (SQLException error) {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + plugin.getDataFolder() + "/progress.db");
+            loggerPlugin.printInfo("Database established connection!");
+        } catch (Exception error) {
             loggerPlugin.printErr("Error connecting to database: " + error.getMessage());
+            throw new RuntimeException(error);
         }
+    }
+
+    public static synchronized DatabaseManagement getInstance(Plugin plugin) {
+        if (instance == null) {
+            instance = new DatabaseManagement(plugin);
+        }
+
+        return instance;
     }
 
     @Override
     public void disconnect() {
         try {
-            if (connection.isValid(15)) {
+            if (connection.isValid(15) && !connection.isClosed()) {
                 connection.close();
 
-                loggerPlugin.printInfo("Database disconnected");
+                loggerPlugin.printInfo("Database disconnected...");
             }
         } catch (SQLException error) {
             loggerPlugin.printErr("Error disconnecting the database: " + error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 
     @Override
-    public Connection getConnection(String databaseName) {
-        try {
-            String url = "jdbc:sqlite:" + plugin.getDataFolder() + "/" + databaseName;
-
-            return DriverManager.getConnection(url);
-        } catch (SQLException error) {
-            loggerPlugin.printErr("Error getting database connection: " + error.getMessage());
-        }
-        return null;
+    public Connection getConnection() {
+        return connection;
     }
 }

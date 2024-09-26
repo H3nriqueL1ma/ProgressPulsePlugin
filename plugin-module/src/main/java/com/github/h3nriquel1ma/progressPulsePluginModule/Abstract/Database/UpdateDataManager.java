@@ -17,11 +17,11 @@ public abstract class UpdateDataManager {
 
     protected UpdateDataManager(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
-        this.databaseManagement = new DatabaseManagement(plugin);
+        this.databaseManagement = DatabaseManagement.getInstance(plugin);
     }
 
     public void updateData(String sql, String tableName, Object... params) {
-        try (Connection connection = databaseManagement.getConnection("progress.db")) {
+        try (Connection connection = databaseManagement.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             int index = 1;
