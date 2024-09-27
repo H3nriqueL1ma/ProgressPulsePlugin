@@ -16,10 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 // Comando que retorna o XP das skills do jogador.
 public class SkillsXpListCommand implements CommandExecutor {
 

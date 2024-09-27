@@ -49,10 +49,10 @@ public final class ProgressPulsePlugin extends JavaPlugin {
 
         registerListeners.register(new JoinEventListener(this, virtualSingleThread, virtualThreadTask),
                                     new CombatEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new ConstructionEventListener(this),
-                                    new FishingEventListener(this),
+                                    new ConstructionEventListener(this, virtualSingleThread, virtualThreadTask),
+                                    new FishingEventListener(this, virtualSingleThread, virtualThreadTask),
                                     new MiningEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new ResourceCollectionEventListener(this));
+                                    new ResourceCollectionEventListener(this, virtualSingleThread, virtualThreadTask));
 
         registerCommands.register(
                 "skillsXP",

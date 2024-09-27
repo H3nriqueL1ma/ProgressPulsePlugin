@@ -21,9 +21,9 @@ public class DatabasePlayerDataUpdate extends UpdateDataManager implements Updat
     @Override
     public void update(String playerId, String updateParam) {
         if (databasePlayerDataSelect.select(playerId) != null) {
-            String sql = "UPDATE players SET ? = ? + 1 WHERE playerID = ?";
+            String sql = "UPDATE players SET " + updateParam + " = " + updateParam + " + 1 WHERE playerID = ?";
 
-            updateData(sql, "Players", updateParam, updateParam, playerId);
+            updateData(sql, "Players", playerId);
         } else {
             loggerPlugin.printErr("Error: PlayerId not exists!");
         }

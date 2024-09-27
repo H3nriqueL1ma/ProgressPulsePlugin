@@ -52,8 +52,6 @@ public class CombatEventListener implements Listener {
                            loggerPlugin.printErr("Error executing PlayerJoin Inserting Data task: " + throwable.getMessage());
                        }
                     });
-
-
         }
     }
 }
