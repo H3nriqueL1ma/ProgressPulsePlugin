@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 
 public final class ProgressPulsePlugin extends JavaPlugin {
 
-    private ConnectionManager databaseManagement;
+    private final ConnectionManager databaseManagement = DatabaseManagement.getInstance(this);
     private LogUtil<String> loggerPlugin;
 
     @Override
@@ -32,7 +32,6 @@ public final class ProgressPulsePlugin extends JavaPlugin {
         VirtualTaskManager virtualThreadTask = new VirtualThreadTask();
 
         CreationManager databasePlayerTableCreator = new DatabasePlayerTableCreator(this);
-        databaseManagement = DatabaseManagement.getInstance(this);
 
         Register registerListeners = new RegisterListeners(this);
         Register registerCommands = new RegisterCommands(this);
@@ -52,7 +51,7 @@ public final class ProgressPulsePlugin extends JavaPlugin {
                                     new CombatEventListener(this, virtualSingleThread, virtualThreadTask),
                                     new ConstructionEventListener(this),
                                     new FishingEventListener(this),
-                                    new MiningEventListener(this),
+                                    new MiningEventListener(this, virtualSingleThread, virtualThreadTask),
                                     new ResourceCollectionEventListener(this));
 
         registerCommands.register(

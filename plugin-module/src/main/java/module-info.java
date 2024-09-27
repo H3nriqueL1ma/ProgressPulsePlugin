@@ -1,9 +1,10 @@
 open module progress.pulse.plugin.module {
     requires core;
     requires org.bukkit;
-    requires java.sql;
     requires net.kyori.adventure;
     requires org.jetbrains.annotations;
+    requires com.zaxxer.hikari;
+    requires java.sql;
 
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database;
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database;

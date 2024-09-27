@@ -24,6 +24,11 @@ public abstract class UpdateDataManager {
         try (Connection connection = databaseManagement.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
 
+            String finalSql = sql;
+            for (Object param : params) {
+                finalSql = finalSql.replaceFirst("\\?", param instanceof String ? "'" + param + "'" : param.toString());
+            }
+
             int index = 1;
 
             for (Object param : params) {
@@ -31,6 +36,8 @@ public abstract class UpdateDataManager {
             }
 
             statement.executeUpdate();
+
+            loggerPlugin.printInfo("Executing SQL: " + finalSql);
 
             loggerPlugin.printInfo("Updating data in " + tableName + "successfully");
         } catch (SQLException error) {

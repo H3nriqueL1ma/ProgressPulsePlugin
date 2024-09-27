@@ -10,28 +10,21 @@ import java.sql.*;
 
 public abstract class SelectDataManager {
 
-    private final LogUtil<String> loggerPlugin;
     private final ConnectionManager databaseManagement;
 
     protected SelectDataManager(Plugin plugin) {
-        this.loggerPlugin = new LoggerPlugin(plugin);
         this.databaseManagement = DatabaseManagement.getInstance(plugin);
     }
 
-    public ResultSet selectData(String sql, String tableName, Object... params) {
-        try (Connection connection = databaseManagement.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(sql);
+    public ResultSet selectData(String sql, Object... params) throws SQLException {
+        Connection connection = databaseManagement.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
 
-            int index = 1;
-
-            for (Object param : params) {
-                statement.setObject(index++, param);
-            }
-
-            return statement.executeQuery();
-        } catch (SQLException error) {
-            loggerPlugin.printErr("Error selecting data from " + tableName + " table: " + error.getMessage());
-            throw new RuntimeException(error);
+        int index = 1;
+        for (Object param : params) {
+            statement.setObject(index++, param);
         }
+
+        return statement.executeQuery();
     }
 }

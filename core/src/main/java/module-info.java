@@ -1,7 +1,8 @@
 open module core {
-    requires java.sql;
     requires jdk.compiler;
     requires org.bukkit;
+    requires com.zaxxer.hikari;
+    requires java.sql;
 
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database;
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils;
