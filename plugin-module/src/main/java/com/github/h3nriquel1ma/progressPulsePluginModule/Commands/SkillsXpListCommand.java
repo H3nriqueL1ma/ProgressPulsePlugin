@@ -46,7 +46,7 @@ public class SkillsXpListCommand implements CommandExecutor {
 
                 player.sendMessage(
                         Component.text()
-                                .content(playerName + " Skills")
+                                .content(playerName + " Skills \n")
                                 .color(TextColor.color(255, 153, 51))
                                 .append(
                                         Component.text(spacingChatText.addSpacing("Combat:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),

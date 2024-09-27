@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.github.h3nriquel1ma</groupId>
         <artifactId>progress-pulse-plugin</artifactId>
-        <version>0.0.1-alpha_1.18.2</version>
+        <version>0.2.3-alpha_1.18.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>progress-pulse-plugin-main</artifactId>
-    <version>0.0.1-alpha_1.18.2</version>
+    <version>0.2.3-alpha_1.18.2</version>
     <packaging>jar</packaging>
 
     <name>main</name>

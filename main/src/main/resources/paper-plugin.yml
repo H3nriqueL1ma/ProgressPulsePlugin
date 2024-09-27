@@ -1,5 +1,5 @@
 name: progressPulse
-version: '0.0.1-alpha_1.18.2'
+version: '0.2.3-alpha_1.18.2'
 main: com.github.h3nriquel1ma.progressPulsePluginMain.ProgressPulsePlugin
 api-version: '1.18'
 description: "A plugin that adds a progression system by level of actions such as mining, combat, building, and many others."
