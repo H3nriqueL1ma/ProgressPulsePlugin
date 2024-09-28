@@ -107,5 +107,11 @@
             <artifactId>progress-pulse-plugin-module</artifactId>
             <version>0.0.1-alpha_1.18.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.h3nriquel1ma</groupId>
+            <artifactId>progress-pulse-plugin-module</artifactId>
+            <version>0.2.3-alpha_1.18.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

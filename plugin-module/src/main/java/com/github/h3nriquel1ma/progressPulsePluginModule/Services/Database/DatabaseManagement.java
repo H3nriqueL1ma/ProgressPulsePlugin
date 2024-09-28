@@ -16,6 +16,7 @@ public class DatabaseManagement implements ConnectionManager {
     private final HikariDataSource dataSource;
     private final LogUtil<String> loggerPlugin;
 
+
     private DatabaseManagement(Plugin plugin) {
         this.loggerPlugin = new LoggerPlugin(plugin);
         HikariConfig config = new HikariConfig();

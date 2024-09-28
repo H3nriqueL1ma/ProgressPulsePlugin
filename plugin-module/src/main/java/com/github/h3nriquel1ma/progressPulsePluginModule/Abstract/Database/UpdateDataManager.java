@@ -31,7 +31,7 @@ public abstract class UpdateDataManager {
 
             statement.executeUpdate();
 
-            loggerPlugin.printInfo("Updating data in " + tableName + "successfully");
+            loggerPlugin.printInfo("Updating data in " + tableName + " successfully!");
         } catch (SQLException error) {
             loggerPlugin.printErr("Error updating data in " + tableName + " table: " + error.getMessage());
         }
