@@ -2,7 +2,6 @@ package com.github.h3nriquel1ma.progressPulsePluginModule.Commands;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.SelectManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.SpacingUtil;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Models.PlayerData;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataSelect;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
@@ -20,11 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class SkillsXpListCommand implements CommandExecutor {
 
     private final SelectManager databasePlayerDataSelect;
-    private final SpacingUtil spacingChatText;
     private final LogUtil<String> loggerPlugin;
 
-    public SkillsXpListCommand(Plugin plugin, SpacingUtil spacingChatText) {
-        this.spacingChatText = spacingChatText;
+    public SkillsXpListCommand(Plugin plugin) {
         this.databasePlayerDataSelect = new DatabasePlayerDataSelect(plugin);
         this.loggerPlugin = new LoggerPlugin(plugin);
     }
@@ -49,20 +46,25 @@ public class SkillsXpListCommand implements CommandExecutor {
                                 .content(playerName + " Skills \n")
                                 .color(TextColor.color(255, 153, 51))
                                 .append(
-                                        Component.text(spacingChatText.addSpacing("Combat:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
-                                        Component.text(playerCombatPoints + "\n", TextColor.color(50, 205, 50)))
+                                        Component.text(playerCombatPoints, TextColor.color(50, 205, 50)),
+                                        Component.text("     Combat" + "\n", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
+                                        )
                                 .append(
-                                        Component.text(spacingChatText.addSpacing("Construction:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
-                                        Component.text(playerConstructionPoints + "\n", TextColor.color(50, 205, 50)))
+                                        Component.text(playerConstructionPoints, TextColor.color(50, 205, 50)),
+                                        Component.text("     Construction" + "\n", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
+                                        )
                                 .append(
-                                        Component.text(spacingChatText.addSpacing("Fishing:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
-                                        Component.text(playerFishingPoints + "\n", TextColor.color(50, 205, 50)))
+                                        Component.text(playerFishingPoints, TextColor.color(50, 205, 50)),
+                                        Component.text("     Fishing" + "\n", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
+                                        )
                                 .append(
-                                        Component.text(spacingChatText.addSpacing("Mining:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
-                                        Component.text(playerMiningPoints + "\n", TextColor.color(50, 205, 50)))
+                                        Component.text(playerMiningPoints, TextColor.color(50, 205, 50)),
+                                        Component.text("     Mining" + "\n", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
+                                        )
                                 .append(
-                                        Component.text(spacingChatText.addSpacing("Res. Collecting:", 20), TextColor.color(128, 128, 128), TextDecoration.ITALIC),
-                                        Component.text(playerResPoints + "\n", TextColor.color(50, 205, 50)))
+                                        Component.text(playerResPoints, TextColor.color(50, 205, 50)),
+                                        Component.text("     Res. Collecting", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
+                                        )
                 );
             } else {
                 loggerPlugin.printErr("Error: playerData is null!");

@@ -1,6 +1,5 @@
 open module main {
-    requires progress.pulse.plugin.module;
+    requires services;
     requires core;
     requires org.bukkit;
-    requires java.sql;
 }

@@ -11,7 +11,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>progress-pulse-plugin-main</artifactId>
+    <artifactId>ProgressPulse</artifactId>
     <version>0.2.3-alpha_1.18.2</version>
     <packaging>jar</packaging>
 
@@ -47,8 +47,8 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>com.github.h3nriquel1ma:progress-pulse-plugin-core</include>
-                                    <include>com.github.h3nriquel1ma:progress-pulse-plugin-module</include>
+                                    <include>com.github.h3nriquel1ma:PPCore</include>
+                                    <include>com.github.h3nriquel1ma:PPServices</include>
                                     <include>com.zaxxer:HikariCP</include>
                                 </includes>
                             </artifactSet>
@@ -70,6 +70,7 @@
                 </executions>
             </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -98,20 +99,14 @@
         </dependency>
         <dependency>
             <groupId>com.github.h3nriquel1ma</groupId>
-            <artifactId>progress-pulse-plugin-core</artifactId>
-            <version>0.0.1-alpha_1.18.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.h3nriquel1ma</groupId>
-            <artifactId>progress-pulse-plugin-module</artifactId>
-            <version>0.0.1-alpha_1.18.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.h3nriquel1ma</groupId>
-            <artifactId>progress-pulse-plugin-module</artifactId>
+            <artifactId>PPCore</artifactId>
             <version>0.2.3-alpha_1.18.2</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.h3nriquel1ma</groupId>
+            <artifactId>PPServices</artifactId>
+            <version>0.2.3-alpha_1.18.2</version>
         </dependency>
     </dependencies>
 </project>

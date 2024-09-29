@@ -9,4 +9,5 @@ open module core {
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Models;
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.MainPlugin;
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads;
+    exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Verification;
 }

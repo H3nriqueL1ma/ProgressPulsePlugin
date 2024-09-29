@@ -1,25 +1,17 @@
 package com.github.h3nriquel1ma.progressPulsePluginMain;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.ConnectionManager;
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Database.CreationManager;
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.MainPlugin.Register;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads.VirtualTaskManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads.VirtualThreadManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
-import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.SpacingUtil;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Commands.SkillsXpListCommand;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Events.*;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.DatabaseManagement;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Tables.DatabasePlayerTableCreator;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterCommands;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterListeners;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.DatabaseInitializer;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.CommandsStaticRegister;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterEvents;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads.VirtualSingleThread;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads.VirtualThreadTask;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.SpacingChatText;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.concurrent.ExecutorService;
 
 public final class ProgressPulsePlugin extends JavaPlugin {
 
@@ -31,33 +23,13 @@ public final class ProgressPulsePlugin extends JavaPlugin {
         VirtualThreadManager virtualSingleThread = new VirtualSingleThread();
         VirtualTaskManager virtualThreadTask = new VirtualThreadTask();
 
-        CreationManager databasePlayerTableCreator = new DatabasePlayerTableCreator(this);
-
-        Register registerListeners = new RegisterListeners(this);
-        Register registerCommands = new RegisterCommands(this);
-
-        SpacingUtil spacingChatText = new SpacingChatText();
-
         loggerPlugin = new LoggerPlugin(this);
 
         loggerPlugin.printInfo("ProgressPulse has been enabled!");
 
-        ExecutorService singleExecutor = virtualSingleThread.newSingleExecutor();
-        virtualThreadTask.execute(databasePlayerTableCreator::create, singleExecutor);
-
-        singleExecutor.shutdown();
-
-        registerListeners.register(new JoinEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new CombatEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new ConstructionEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new FishingEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new MiningEventListener(this, virtualSingleThread, virtualThreadTask),
-                                    new ResourceCollectionEventListener(this, virtualSingleThread, virtualThreadTask));
-
-        registerCommands.register(
-                "skillsXP",
-                new SkillsXpListCommand(this, spacingChatText)
-        );
+        DatabaseInitializer.initialize(this, virtualSingleThread, virtualThreadTask);
+        RegisterEvents.register(this, virtualSingleThread, virtualThreadTask);
+        CommandsStaticRegister.register(this);
     }
 
     @Override

@@ -19,6 +19,6 @@
     <modules>
         <module>main</module>
         <module>core</module>
-        <module>plugin-module</module>
+        <module>services</module>
     </modules>
 </project>

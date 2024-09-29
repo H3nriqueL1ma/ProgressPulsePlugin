@@ -1,4 +1,4 @@
-package com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.SubRegisters;
 
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.MainPlugin.Register;
 import org.bukkit.command.CommandExecutor;
