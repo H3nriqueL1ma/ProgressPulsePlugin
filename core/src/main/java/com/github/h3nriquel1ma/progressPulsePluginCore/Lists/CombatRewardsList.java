@@ -11,6 +11,10 @@ public class CombatRewardsList {
     Map<Integer, RewardModel> rewardsList = new HashMap<>();
 
     public CombatRewardsList() {
-        this.rewardsList.put(10, new RewardModel(new ItemStack(Material.STONE_SWORD), 1));
+        this.rewardsList.put(10, new RewardModel(new ItemStack(Material.STONE_SWORD, 1)));
+    }
+
+    public Map<Integer, RewardModel> getRewardsList() {
+        return rewardsList;
     }
 }

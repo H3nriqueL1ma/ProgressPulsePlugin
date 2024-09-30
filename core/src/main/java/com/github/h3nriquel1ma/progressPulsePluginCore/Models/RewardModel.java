@@ -4,14 +4,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class RewardModel {
     private ItemStack reward;
-    private int quantity;
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-    public int getQuantity() {
-        return quantity;
-    }
 
     public void setReward(ItemStack reward) {
         this.reward = reward;
@@ -20,8 +12,7 @@ public class RewardModel {
         return reward;
     }
 
-    public RewardModel(ItemStack reward, int quantity) {
+    public RewardModel(ItemStack reward) {
         this.reward = reward;
-        this.quantity = quantity;
     }
 }
