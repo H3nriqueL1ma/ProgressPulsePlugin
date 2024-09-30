@@ -7,7 +7,7 @@ import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.LogUtil;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.DatabaseManagement;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.DatabaseInitializer;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.CommandsStaticRegister;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.RegisterEvents;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.EventsRegister;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads.VirtualSingleThread;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads.VirtualThreadTask;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.LoggerPlugin;
@@ -28,7 +28,7 @@ public final class ProgressPulsePlugin extends JavaPlugin {
         loggerPlugin.printInfo("ProgressPulse has been enabled!");
 
         DatabaseInitializer.initialize(this, virtualSingleThread, virtualThreadTask);
-        RegisterEvents.register(this, virtualSingleThread, virtualThreadTask);
+        EventsRegister.register(this, virtualSingleThread, virtualThreadTask);
         CommandsStaticRegister.register(this);
     }
 

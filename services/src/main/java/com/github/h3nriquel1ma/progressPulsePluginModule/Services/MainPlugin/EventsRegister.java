@@ -9,7 +9,7 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Verification.O
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Verification.PickaxeVerifier;
 import org.bukkit.plugin.Plugin;
 
-public class RegisterEvents {
+public class EventsRegister {
 
     public static void register(Plugin plugin, VirtualThreadManager virtualSingleThread, VirtualTaskManager virtualThreadTask) {
         Register registerListeners = new RegisterListeners(plugin);
