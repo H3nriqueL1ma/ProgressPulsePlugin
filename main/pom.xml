@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.github.h3nriquel1ma</groupId>
         <artifactId>progress-pulse-plugin</artifactId>
-        <version>0.2.3-alpha_1.18.2</version>
+        <version>1.18.2-alpha</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>ProgressPulse</artifactId>
-    <version>0.2.3-alpha_1.18.2</version>
+    <version>1.18.2-alpha</version>
     <packaging>jar</packaging>
 
     <name>main</name>
@@ -51,6 +51,9 @@
                                     <include>com.github.h3nriquel1ma:PPServices</include>
                                     <include>com.zaxxer:HikariCP</include>
                                 </includes>
+                                <excludes>
+                                    <exclude>module-info.java</exclude>
+                                </excludes>
                             </artifactSet>
                             <filters>
                                 <filter>
@@ -65,6 +68,27 @@
                                     <mainClass>com.github.h3nriquel1ma.progressPulsePluginMain.ProgressPulsePlugin</mainClass>
                                 </transformer>
                             </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.moditect</groupId>
+                <artifactId>moditect-maven-plugin</artifactId>
+                <version>1.2.1.Final</version>
+                <executions>
+                    <execution>
+                        <id>add-module-infos</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>add-module-info</goal>
+                        </goals>
+                        <configuration>
+                            <overwriteExistingFiles>true</overwriteExistingFiles>
+                            <module>
+                                <moduleInfoFile>src/main/java/module-info.java</moduleInfoFile>
+                            </module>
                         </configuration>
                     </execution>
                 </executions>
@@ -84,10 +108,6 @@
             <id>papermc-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -100,13 +120,12 @@
         <dependency>
             <groupId>com.github.h3nriquel1ma</groupId>
             <artifactId>PPCore</artifactId>
-            <version>0.2.3-alpha_1.18.2</version>
-            <scope>compile</scope>
+            <version>1.18.2-alpha</version>
         </dependency>
         <dependency>
             <groupId>com.github.h3nriquel1ma</groupId>
             <artifactId>PPServices</artifactId>
-            <version>0.2.3-alpha_1.18.2</version>
+            <version>1.18.2-alpha</version>
         </dependency>
     </dependencies>
 </project>

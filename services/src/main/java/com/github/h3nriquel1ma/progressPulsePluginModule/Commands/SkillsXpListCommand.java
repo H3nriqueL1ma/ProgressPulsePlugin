@@ -41,8 +41,12 @@ public class SkillsXpListCommand implements CommandExecutor {
                 int playerMiningPoints = playerData.getMiningPoints();
                 int playerResPoints = playerData.getResCollPoints();
 
+
                 player.sendMessage(
                         Component.text()
+                                .append(
+                                        Component.text("-------------------------------------\n", TextColor.color(255, 153, 51))
+                                )
                                 .content(playerName + " Skills \n")
                                 .color(TextColor.color(255, 153, 51))
                                 .append(
@@ -65,6 +69,9 @@ public class SkillsXpListCommand implements CommandExecutor {
                                         Component.text(playerResPoints, TextColor.color(50, 205, 50)),
                                         Component.text("     Res. Collecting", TextColor.color(128, 128, 128), TextDecoration.ITALIC)
                                         )
+                                .append(
+                                        Component.text("\n-------------------------------------", TextColor.color(255, 153, 51))
+                                )
                 );
             } else {
                 loggerPlugin.printErr("Error: playerData is null!");

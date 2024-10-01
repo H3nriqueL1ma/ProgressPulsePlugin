@@ -12,14 +12,11 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queri
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards.CombatRewardsDistributor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 
 // Ouvinte de evento de ações de combate.

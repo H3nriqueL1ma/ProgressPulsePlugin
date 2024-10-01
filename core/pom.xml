@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.github.h3nriquel1ma</groupId>
         <artifactId>progress-pulse-plugin</artifactId>
-        <version>0.2.3-alpha_1.18.2</version>
+        <version>1.18.2-alpha</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>PPCore</artifactId>
-    <version>0.2.3-alpha_1.18.2</version>
+    <version>1.18.2-alpha</version>
     <packaging>jar</packaging>
 
     <name>core</name>
@@ -22,27 +22,6 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <build>
-        <defaultGoal>clean package</defaultGoal>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
 
     <repositories>
         <repository>

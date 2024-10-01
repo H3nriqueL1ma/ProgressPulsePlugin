@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.github.h3nriquel1ma</groupId>
         <artifactId>progress-pulse-plugin</artifactId>
-        <version>0.2.3-alpha_1.18.2</version>
+        <version>1.18.2-alpha</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>PPServices</artifactId>
-    <version>0.2.3-alpha_1.18.2</version>
+    <version>1.18.2-alpha</version>
     <packaging>jar</packaging>
 
     <name>services</name>
@@ -41,13 +41,11 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>5.1.0</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.github.h3nriquel1ma</groupId>
             <artifactId>PPCore</artifactId>
-            <version>0.2.3-alpha_1.18.2</version>
-            <scope>compile</scope>
+            <version>1.18.2-alpha</version>
         </dependency>
     </dependencies>
 </project>

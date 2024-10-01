@@ -6,7 +6,7 @@
 
     <groupId>com.github.h3nriquel1ma</groupId>
     <artifactId>progress-pulse-plugin</artifactId>
-    <version>0.2.3-alpha_1.18.2</version>
+    <version>1.18.2-alpha</version>
     <packaging>pom</packaging>
 
     <name>progress-pulse-plugin</name>
