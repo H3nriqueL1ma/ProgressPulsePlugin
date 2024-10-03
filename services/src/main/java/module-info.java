@@ -6,6 +6,8 @@ open module services {
     requires com.zaxxer.hikari;
     requires java.sql;
     requires commons.lang;
+    requires org.checkerframework.checker.qual;
+    requires com.google.common;
 
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Database;
     exports com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database;

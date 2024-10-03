@@ -11,5 +11,6 @@ open module core {
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Threads;
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Verification;
     exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Rewards;
-    exports com.github.h3nriquel1ma.progressPulsePluginCore.Lists;
+    exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Rewards.ConcreteEntries;
+    exports com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Items;
 }

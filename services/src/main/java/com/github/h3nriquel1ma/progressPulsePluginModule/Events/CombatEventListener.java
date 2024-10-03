@@ -9,6 +9,7 @@ import com.github.h3nriquel1ma.progressPulsePluginCore.Models.PlayerData;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Threads.OnEventManager;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataSelect;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataUpdate;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Items.PotionItemCreator;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards.CombatRewardsDistributor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
@@ -30,7 +31,7 @@ public class CombatEventListener extends OnEventManager implements Listener {
         super(plugin, singleThread, threadTask);
         this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
         this.databasePlayerDataSelect = new DatabasePlayerDataSelect(plugin);
-        this.combatRewardsDistributor = new CombatRewardsDistributor();
+        this.combatRewardsDistributor = new CombatRewardsDistributor(new PotionItemCreator());
     }
 
     @EventHandler
