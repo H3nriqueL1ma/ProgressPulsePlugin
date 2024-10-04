@@ -43,6 +43,8 @@ public class MiningEventListener extends OnEventManager implements Listener {
                     databasePlayerDataUpdate.update(playerId, "miningPoints");
                     player.sendActionBar(Component.text(ChatColor.GRAY + "+1 XP in " + ChatColor.DARK_AQUA + "Mining" + ChatColor.GRAY + "!"));
                 });
+
+
             }
         }
     }

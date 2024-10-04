@@ -1,5 +1,6 @@
-package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards;
+package com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards.Combat;
 
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Items.ItemPackManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Items.PotionItemManager;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Rewards.RewardManager;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Lists.CombatRewardsList;
@@ -10,9 +11,11 @@ import org.bukkit.entity.Player;
 public class CombatRewardsDistributor extends RewardDistributor implements RewardManager {
 
     private final PotionItemManager potionItemCreator;
+    private final ItemPackManager itemPackCreator;
 
-    public CombatRewardsDistributor(PotionItemManager potionItemCreator) {
+    public CombatRewardsDistributor(PotionItemManager potionItemCreator, ItemPackManager itemPackCreator) {
         this.potionItemCreator = potionItemCreator;
+        this.itemPackCreator = itemPackCreator;
     }
 
     @Override
@@ -20,7 +23,7 @@ public class CombatRewardsDistributor extends RewardDistributor implements Rewar
         if (playerData != null) {
             int playerCombatPoints = playerData.getCombatPoints();
 
-            CombatRewardsList combatRewardsList = new CombatRewardsList(potionItemCreator);
+            CombatRewardsList combatRewardsList = new CombatRewardsList(potionItemCreator, itemPackCreator);
 
             reward(combatRewardsList.getRewardsList(), playerCombatPoints, player);
         }
