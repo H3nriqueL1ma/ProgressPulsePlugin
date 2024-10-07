@@ -1,17 +1,20 @@
 package com.github.h3nriquel1ma.progressPulsePluginModule.Abstract.Rewards;
 
+import com.github.h3nriquel1ma.progressPulsePluginCore.Interfaces.Utils.MessageUtil;
 import com.github.h3nriquel1ma.progressPulsePluginCore.Models.RewardModel;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffect;
 
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class RewardDistributor {
+
+    private final MessageUtil playerMessageSender;
+
+    protected RewardDistributor(MessageUtil playerMessageSender) {
+        this.playerMessageSender = playerMessageSender;
+    }
 
     protected void reward(Map<Integer, RewardModel> rewardsList, int playerPoints, Player player) {
         PlayerInventory playerInventory = player.getInventory();
@@ -22,25 +25,24 @@ public abstract class RewardDistributor {
             if (reward != null) {
                 if (reward.getReward() != null) {
                     playerInventory.addItem(reward.getReward());
-                    player.sendMessage(
-                            Component.text()
-                                    .content("Congrats! ")
-                                    .color(TextColor.color(50, 205, 50))
-                                    .decoration(TextDecoration.BOLD, true)
-                                    .append(
-                                            Component.text("You reached level ", TextColor.color(255, 255, 0)),
-                                            Component.text(playerPoints, TextColor.color(173, 216, 230)),
-                                            Component.text(" and received ", TextColor.color(255, 255, 0)),
-                                            Component.text(reward.getReward().displayName().toString(), TextColor.color(255, 215, 0)),
-                                            Component.text("!", TextColor.color(255, 255, 0))
-                                    )
+                    playerMessageSender.sendMessage(player, playerPoints,
+                            (reward.getReward().hasItemMeta() && reward.getReward().getItemMeta().hasDisplayName())
+                                    ? Objects.requireNonNull(reward.getReward().getItemMeta().displayName()).toString()
+                                    : reward.getReward().getType().toString()
                     );
                 } else if (reward.getEffectReward() != null) {
                     player.addPotionEffect(reward.getEffectReward());
+                    playerMessageSender.sendMessage(player, playerPoints, reward.getEffectReward().getType().getName());
                 }
+            } else {
+                handleNoReward(playerPoints);
             }
         } else {
             player.sendMessage("Full inventory! Try claim the reward using /claimrewards");
         }
     }
+
+    private void handleNoReward(int playerPoints) {}
 }
+
+

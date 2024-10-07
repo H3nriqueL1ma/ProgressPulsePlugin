@@ -20,7 +20,7 @@ public abstract class OnEventManager {
         this.loggerPlugin = new LoggerPlugin(plugin);
     }
 
-    protected void onEvent(String taskName, Runnable task) {
+    public void onEvent(String taskName, Runnable task) {
         ExecutorService singleExecutor = singleThread.newSingleExecutor();
 
         threadTask.execute(task, singleExecutor).whenComplete((result, throwable) -> {

@@ -11,7 +11,9 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queri
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Database.Queries.DatabasePlayerDataUpdate;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Items.ItemPackCreator;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Items.PotionItemCreator;
-import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards.Combat.CombatRewardsDistributor;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Rewards.RewardsDistributor;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Threads.OnEventInstance;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Utils.PlayerMessageSender;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
@@ -26,13 +28,18 @@ public class CombatEventListener extends OnEventManager implements Listener {
 
     private final UpdateManager databasePlayerDataUpdate;
     private final SelectManager databasePlayerDataSelect;
-    private final RewardManager combatRewardsDistributor;
+    private final RewardManager rewardsDistributor;
 
     public CombatEventListener(Plugin plugin, VirtualThreadManager singleThread, VirtualTaskManager threadTask) {
         super(plugin, singleThread, threadTask);
         this.databasePlayerDataUpdate = new DatabasePlayerDataUpdate(plugin);
         this.databasePlayerDataSelect = new DatabasePlayerDataSelect(plugin);
-        this.combatRewardsDistributor = new CombatRewardsDistributor(new PotionItemCreator(), new ItemPackCreator());
+        this.rewardsDistributor = new RewardsDistributor(new PotionItemCreator(), new ItemPackCreator(), new OnEventInstance(new OnEventManager(plugin, singleThread, threadTask) {
+            @Override
+            public void onEvent(String taskName, Runnable task) {
+                super.onEvent(taskName, task);
+            }
+        }), new PlayerMessageSender());
     }
 
     @EventHandler
@@ -49,7 +56,7 @@ public class CombatEventListener extends OnEventManager implements Listener {
 
             onEvent("CombatEvent Checking Data and Giving Reward", () -> {
                 PlayerData playerData = databasePlayerDataSelect.select(playerId);
-                combatRewardsDistributor.giveReward(playerData, (Player) damager);
+                rewardsDistributor.giveReward(playerData, (Player) damager);
             });
         }
     }
