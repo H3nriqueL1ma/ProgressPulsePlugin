@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -129,5 +130,44 @@ public class RewardsAdder implements AddEntriesManager<Integer, RewardModel> {
         fishingList.put(30, new RewardModel(new ItemStack(Material.COOKED_SALMON, 5)));
 
         fishingList.put(50, new RewardModel(new PotionEffect(PotionEffectType.LUCK, 72000, 0)));
+
+        ItemStack regenPotion2 = potionItemCreator.createCustomPotion(new ItemStack(Material.POTION, 3), new PotionData(PotionType.REGEN));
+        fishingList.put(100, new RewardModel(new ItemStack(regenPotion2)));
+
+        fishingList.put(200, new RewardModel(new PotionEffect(PotionEffectType.LUCK, 72000, 1)));
+
+        fishingList.put(600, new RewardModel(new PotionEffect(PotionEffectType.LUCK, Integer.MAX_VALUE, 2)));
+
+
+
+
+
+
+        resourcingList.put(10, new RewardModel(new ItemStack(Material.WHEAT_SEEDS, 16)));
+
+        List<ItemStack> fruitsPack = itemPackCreator.createItemPack(
+                new ItemStack(Material.APPLE, 5),
+                new ItemStack(Material.COCOA, 5),
+                new ItemStack(Material.SWEET_BERRIES, 5),
+                new ItemStack(Material.MELON_SLICE, 5),
+                new ItemStack(Material.GLOW_BERRIES, 5)
+        );
+        resourcingList.put(30, new RewardModel(fruitsPack));
+
+        resourcingList.put(50, new RewardModel(new ItemStack(Material.SPRUCE_WOOD, 5)));
+
+        resourcingList.put(70, new RewardModel(new ItemStack(Material.BROWN_MUSHROOM, 10)));
+
+        List<ItemStack> goldArmorPack = itemPackCreator.createItemPack(
+                new ItemStack(Material.GOLDEN_HELMET),
+                new ItemStack(Material.GOLDEN_CHESTPLATE),
+                new ItemStack(Material.GOLDEN_LEGGINGS),
+                new ItemStack(Material.GOLDEN_BOOTS)
+        );
+        resourcingList.put(100, new RewardModel(goldArmorPack));
+
+        resourcingList.put(200, new RewardModel(Material.SAND, 5));
+
+        resourcingList.put(400, new RewardModel(PotionEffectType.FAST_DIGGING))
     }
 }
