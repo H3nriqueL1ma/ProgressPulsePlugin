@@ -166,8 +166,27 @@ public class RewardsAdder implements AddEntriesManager<Integer, RewardModel> {
         );
         resourcingList.put(100, new RewardModel(goldArmorPack));
 
-        resourcingList.put(200, new RewardModel(Material.SAND, 5));
+        resourcingList.put(200, new RewardModel(new ItemStack(Material.SAND, 5)));
 
-        resourcingList.put(400, new RewardModel(PotionEffectType.FAST_DIGGING))
+        resourcingList.put(400, new RewardModel(new ItemStack(Material.TNT, 3)));
+
+
+
+
+
+
+        constructionList.put(10, new RewardModel(new ItemStack(Material.DARK_OAK_WOOD, 32)));
+
+        constructionList.put(30, new RewardModel(new ItemStack(Material.COBBLESTONE, 16)));
+
+        constructionList.put(50, new RewardModel(new ItemStack(Material.DARK_OAK_DOOR)));
+
+        constructionList.put(70, new RewardModel(new ItemStack(Material.GLASS, 8)));
+
+        constructionList.put(100, new RewardModel(new ItemStack(Material.LAPIS_BLOCK, 5)));
+
+        constructionList.put(200, new RewardModel(new ItemStack(Material.LADDER, 10)));
+
+        constructionList.put(400, new RewardModel(new ItemStack(Material.STONE, 5)));
     }
 }
