@@ -6,6 +6,6 @@ main: com.github.h3nriquel1ma.progressPulsePluginMain.ProgressPulsePlugin
 api-version: '1.18'
 
 commands:
-  skillsXP:
+  skills:
     description: Returns the level of the player's skills (actions).
-    usage: /skillsXP
+    usage: /skills

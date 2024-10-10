@@ -4,4 +4,5 @@ import org.bukkit.entity.Player;
 
 public interface MessageUtil {
     void sendMessage(Player player, int playerPoints, String itemName);
+    void sendMessageWithQuantity(Player player, int playerPoints, String itemName, int itemQuantity);
 }

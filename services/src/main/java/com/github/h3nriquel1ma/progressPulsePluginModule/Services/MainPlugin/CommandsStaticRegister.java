@@ -11,7 +11,7 @@ public class CommandsStaticRegister {
         Register registerCommands = new RegisterCommands(plugin);
 
         registerCommands.register(
-                "skillsXP",
+                "skills",
                 new SkillsXpListCommand(plugin)
         );
     }

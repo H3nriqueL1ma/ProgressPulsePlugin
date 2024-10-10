@@ -24,4 +24,22 @@ public class PlayerMessageSender implements MessageUtil {
                         )
         );
     }
+
+    @Override
+    public void sendMessageWithQuantity(Player player, int playerPoints, String itemName, int itemQuantity) {
+        player.sendMessage(
+                Component.text()
+                        .content("Congrats! ")
+                        .color(TextColor.color(50, 205, 50))
+                        .decoration(TextDecoration.BOLD, true)
+                        .append(
+                                Component.text("You reached level ", TextColor.color(255, 255, 0)),
+                                Component.text(playerPoints, TextColor.color(173, 216, 230)),
+                                Component.text(" and received ", TextColor.color(255, 255, 0)),
+                                Component.text("x" + itemQuantity + " ", TextColor.color(40, 40, 40)),
+                                Component.text(itemName, TextColor.color(255, 215, 0)),
+                                Component.text("!", TextColor.color(255, 255, 0))
+                        )
+        );
+    }
 }

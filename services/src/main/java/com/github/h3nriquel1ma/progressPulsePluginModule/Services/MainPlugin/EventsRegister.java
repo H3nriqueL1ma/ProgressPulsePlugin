@@ -7,6 +7,7 @@ import com.github.h3nriquel1ma.progressPulsePluginModule.Events.*;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.MainPlugin.SubRegisters.RegisterListeners;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Verification.OreOrBlockVerifier;
 import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Verification.PickaxeVerifier;
+import com.github.h3nriquel1ma.progressPulsePluginModule.Services.Verification.ResourceVerifier;
 import org.bukkit.plugin.Plugin;
 
 public class EventsRegister {
@@ -19,6 +20,6 @@ public class EventsRegister {
                 new ConstructionEventListener(plugin, virtualSingleThread, virtualThreadTask),
                 new FishingEventListener(plugin, virtualSingleThread, virtualThreadTask),
                 new MiningEventListener(plugin, virtualSingleThread, virtualThreadTask, new PickaxeVerifier(), new OreOrBlockVerifier()),
-                new ResourceCollectionEventListener(plugin, virtualSingleThread, virtualThreadTask));
+                new ResourceCollectionEventListener(plugin, virtualSingleThread, virtualThreadTask, new ResourceVerifier()));
     }
 }

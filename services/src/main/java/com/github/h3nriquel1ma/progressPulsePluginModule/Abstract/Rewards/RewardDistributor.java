@@ -18,27 +18,27 @@ public abstract class RewardDistributor {
 
     protected void reward(Map<Integer, RewardModel> rewardsList, int playerPoints, Player player) {
         PlayerInventory playerInventory = player.getInventory();
+        RewardModel reward = rewardsList.get(playerPoints);
 
-        if (playerInventory.firstEmpty() != -1) {
-            RewardModel reward = rewardsList.get(playerPoints);
-
-            if (reward != null) {
-                if (reward.getReward() != null) {
+        if (reward != null) {
+            if (reward.getReward() != null) {
+                if (playerInventory.firstEmpty() != -1) {
                     playerInventory.addItem(reward.getReward());
-                    playerMessageSender.sendMessage(player, playerPoints,
+                    playerMessageSender.sendMessageWithQuantity(player, playerPoints,
                             (reward.getReward().hasItemMeta() && reward.getReward().getItemMeta().hasDisplayName())
                                     ? Objects.requireNonNull(reward.getReward().getItemMeta().displayName()).toString()
-                                    : reward.getReward().getType().toString()
+                                    : reward.getReward().getType().toString(),
+                            reward.getReward().getAmount()
                     );
-                } else if (reward.getEffectReward() != null) {
-                    player.addPotionEffect(reward.getEffectReward());
-                    playerMessageSender.sendMessage(player, playerPoints, reward.getEffectReward().getType().getName());
+                } else {
+                    player.getWorld().dropItem(player.getLocation(), reward.getReward());
                 }
-            } else {
-                handleNoReward(playerPoints);
+            } else if (reward.getEffectReward() != null) {
+                player.addPotionEffect(reward.getEffectReward());
+                playerMessageSender.sendMessage(player, playerPoints, reward.getEffectReward().getType().getName());
             }
         } else {
-            player.sendMessage("Full inventory! Try claim the reward using /claimrewards");
+            handleNoReward(playerPoints);
         }
     }
 
