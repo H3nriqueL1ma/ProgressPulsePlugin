@@ -36,7 +36,7 @@ public class PlayerMessageSender implements MessageUtil {
                                 Component.text("You reached level ", TextColor.color(255, 255, 0)),
                                 Component.text(playerPoints, TextColor.color(173, 216, 230)),
                                 Component.text(" and received ", TextColor.color(255, 255, 0)),
-                                Component.text("x" + itemQuantity + " ", TextColor.color(40, 40, 40)),
+                                Component.text("x" + itemQuantity + " ", TextColor.color(173, 216, 230)),
                                 Component.text(itemName, TextColor.color(255, 215, 0)),
                                 Component.text("!", TextColor.color(255, 255, 0))
                         )
